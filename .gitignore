@@ -3,3 +3,6 @@ images/__pycache__/
 
 # Ignore VSCode config dir
 .vscode/
+
+# Ignore PyCharm dir
+.idea/

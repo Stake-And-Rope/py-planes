@@ -21,6 +21,7 @@ from PyQt5.QtCore import *
 import sys
 from collections import deque
 from pathlib import Path
+import choose_a_plane_menu
 
 sys.path.append(r'..')
 
@@ -96,9 +97,14 @@ class MainMenu(QWidget):
         
         for i in range(4):
             current_button = QPushButton()
-            current_button.setText(buttons.popleft())
+            button = buttons.popleft()
+            current_button.setText(button)
             current_button.setFont(QFont(fonts[0], 20))
             current_button.setFixedSize(200, 50)
+
+            if button == "Start Game":
+                current_button.clicked.connect(lambda: self.start_game_button_func())
+
             
             main_buttons_layout.addWidget(current_button)
         
@@ -111,8 +117,11 @@ class MainMenu(QWidget):
         main_layout.addLayout(main_buttons_layout)
         self.setLayout(main_layout)
         self.show()
-        
 
+    def start_game_button_func(self):
+        choose_a_plane_menu.start_plane_menu_window()
+        self.hide()
+        
 
 app = QApplication(sys.argv)
 app.setStyleSheet(Path('main_menu.qss').read_text())
