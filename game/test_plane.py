@@ -1,6 +1,11 @@
-import pygame as pg
-from images import user_plane_images
+#!/usr/bin/python3
 
+import pygame as pg
+import sys
+
+
+sys.path.append(r'..')
+from images import user_plane_images
 pg.init()
 
 print()
