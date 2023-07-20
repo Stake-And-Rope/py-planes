@@ -1,16 +1,15 @@
 import pygame as pg
+from images import user_plane_images
 
 pg.init()
 
 print()
 fps = int(input("Enter 45, 60 or 75 fps.Default value is 60 fps : "))
 
-# Create a display window
 window_size = (900, 800)
 screen = pg.display.set_mode(window_size)
 
-# Load image with transparency and convert_alpha()
-plane_with_alpha = pg.image.load("user_plane_images/base_plane.png").convert_alpha()
+plane_with_alpha = pg.image.load('../images/user_plane_images/base_plane.png').convert_alpha()
 
 clock = pg.time.Clock()
 x = 100
@@ -24,7 +23,6 @@ plane_speed = {
 
 speed = plane_speed.get(fps, 3)
 
-# Main loop
 running = True
 while running:
     clock.tick(int(fps))
