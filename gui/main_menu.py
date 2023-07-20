@@ -20,6 +20,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
 from collections import deque
+from pathlib import Path
 
 sys.path.append(r'..')
 
@@ -98,7 +99,7 @@ class MainMenu(QWidget):
             current_button.setText(buttons.popleft())
             current_button.setFont(QFont(fonts[0], 20))
             current_button.setFixedSize(200, 50)
-
+            
             main_buttons_layout.addWidget(current_button)
         
         
@@ -114,6 +115,7 @@ class MainMenu(QWidget):
 
 
 app = QApplication(sys.argv)
+app.setStyleSheet(Path('main_menu.qss').read_text())
 global main_window
 main_window = MainMenu()
 main_window.show()

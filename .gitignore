@@ -1,2 +1,5 @@
 # Ignore pycache
 images/__pycache__/
+
+# Ignore VSCode config dir
+.vscode/
