@@ -18,13 +18,15 @@ from PyQt5.QtWidgets import (QApplication,
                              )
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 import sys, os
 from collections import deque
 from pathlib import Path
 import choose_a_plane_menu
 
 sys.path.append(r'..')
+from sounds.sounds import main_menu_music
+song = r'../sounds/music/main_menu_music.flac'
+
 
 
 # Modify this variable to receive dynamically value from the JSON file
@@ -40,7 +42,7 @@ class MainMenu(QWidget):
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
-        self.player = QMediaPlayer()
+
         
         
         """ADD CUSTOM FONTS"""
@@ -121,13 +123,6 @@ class MainMenu(QWidget):
         main_layout.addLayout(main_buttons_layout)
         self.setLayout(main_layout)
         self.show()
-        
-        """PLAY THE BACKGROUND MUSIC"""
-        music_bg = os.path.join(os.getcwd(), r'../sounds/music/main_menu_music.flac')
-        url = QUrl.fromLocalFile(music_bg)
-        content = QMediaContent(url)        
-        self.player.setMedia(content)
-        # self.player.play()
 
     def start_game_button_func(self):
         choose_a_plane_menu.start_plane_menu_window()
@@ -139,4 +134,5 @@ app.setStyleSheet(Path('main_menu.qss').read_text())
 global main_window
 main_window = MainMenu()
 main_window.show()
-app.exec()
+# app.exec() # Keep this line commented for now. The app is initiated by the main_menu_music function
+main_menu_music(song, app)
