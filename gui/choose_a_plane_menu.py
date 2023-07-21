@@ -22,15 +22,18 @@ class PlanesMenu(QWidget):
         fonts = QFontDatabase.applicationFontFamilies(font)
 
         """ADD THE LAYOUTS - ONE AT THE TOP, ONE AT THE BOTTOM AND ONE MAIN LAYOUT FOR BOTH"""
-        top_layout = QHBoxLayout()
+        top_layout = QVBoxLayout()        
         bottom_layout = QHBoxLayout()
+        bottom_layout.addStretch()
+        bottom_layout.addSpacing(10)
+        
         planes_menu_main_layout = QVBoxLayout()
 
         bottom_grid_layout = QGridLayout()
 
         """ADDED A TOP GRID LAYOUT, WHICH WE WILL PUT IN THE TOP LAYOUT"""
         top_grid_layout = QGridLayout()
-        top_grid_layout.setSpacing(60)  # spacing between the cells in the gird layout
+        top_grid_layout.setSpacing(30)  # spacing between the cells in the gird layout
 
         all_planes = deque(['base_plane', 'base_plane', 'base_plane', 'base_plane', 'base_plane', 'base_plane'])
         for row in range(2):
@@ -38,6 +41,7 @@ class PlanesMenu(QWidget):
                 plane_image = f"../images/user_plane_images/{all_planes.pop()}.png"
 
                 plane_button = QPushButton()
+                plane_button.setProperty("class", "planes")
                 plane_button.setIcon(QIcon(plane_image))
                 plane_button.setIconSize(QSize(150, 150))
                 plane_button.setFixedSize(140, 140)
@@ -46,16 +50,15 @@ class PlanesMenu(QWidget):
                 top_grid_layout.addWidget(plane_button, row, col)
 
         top_layout.addLayout(top_grid_layout)
+        top_layout.addStretch()
+        top_layout.addSpacing(10)
 
         """MAKE THE BUTTONS FOR THE BOTTOM LAYOUT"""
-        plane_info_groupbox = QGroupBox("Plane's info")
+        plane_info_groupbox = QGroupBox()
         plane_info_groupbox.setFixedWidth(300)
+        plane_info_groupbox.setFixedHeight(100)
         plane_info_layout = QHBoxLayout()
 
-        plane_info_groupbox.setStyleSheet("QGroupBox{background-color: transparent; border: 1px solid green; "
-                                          "border-radius: 5px; margin-top: 3ex;} "
-                                          "QGroupBox:title {subcontrol-position: top middle; "
-                                          "padding: -14px 0px 0px 3px; color:green;}")
 
         # some_test_button = QPushButton()
 
@@ -80,11 +83,17 @@ class PlanesMenu(QWidget):
         bottom_grid_layout.addWidget(plane_info_groupbox, 0, 0)
         bottom_grid_layout.addWidget(back_to_main_menu_button, 0, 1)
         bottom_grid_layout.addWidget(start_button, 0, 2)
+        bottom_grid_layout.setVerticalSpacing(20)
+
 
         bottom_layout.addLayout(bottom_grid_layout)
-
+        bottom_layout.addStretch(10)
+        bottom_layout.addSpacing(20)
+        top_layout.addStretch(10)
+        top_layout.addSpacing(20)
         planes_menu_main_layout.addLayout(top_layout)
         planes_menu_main_layout.addLayout(bottom_layout)
+
 
         self.setLayout(planes_menu_main_layout)
 

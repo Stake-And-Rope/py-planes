@@ -127,7 +127,7 @@ class MainMenu(QWidget):
         url = QUrl.fromLocalFile(music_bg)
         content = QMediaContent(url)        
         self.player.setMedia(content)
-        self.player.play()
+        # self.player.play()
 
     def start_game_button_func(self):
         choose_a_plane_menu.start_plane_menu_window()
