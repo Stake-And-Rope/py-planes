@@ -18,7 +18,8 @@ from PyQt5.QtWidgets import (QApplication,
                              )
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-import sys
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+import sys, os
 from collections import deque
 from pathlib import Path
 import choose_a_plane_menu
@@ -39,6 +40,7 @@ class MainMenu(QWidget):
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
+        self.player = QMediaPlayer()
         
         
         """ADD CUSTOM FONTS"""
@@ -108,6 +110,8 @@ class MainMenu(QWidget):
             
             main_buttons_layout.addWidget(current_button)
         
+        main_buttons_layout.addStretch()
+        main_buttons_layout.addSpacing(150)
         
         main_layout = QVBoxLayout()
         main_layout.addStretch(2)
@@ -117,6 +121,13 @@ class MainMenu(QWidget):
         main_layout.addLayout(main_buttons_layout)
         self.setLayout(main_layout)
         self.show()
+        
+        """PLAY THE BACKGROUND MUSIC"""
+        music_bg = os.path.join(os.getcwd(), r'../sounds/music/main_menu_music.flac')
+        url = QUrl.fromLocalFile(music_bg)
+        content = QMediaContent(url)        
+        self.player.setMedia(content)
+        self.player.play()
 
     def start_game_button_func(self):
         choose_a_plane_menu.start_plane_menu_window()
