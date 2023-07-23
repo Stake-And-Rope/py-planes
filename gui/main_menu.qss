@@ -10,8 +10,12 @@ QPushButton{
     outline: 0px;
 }
 
-.planes{
-    background-color: #f7ff05;
+QPushButton:hover{
+    background-color: #017227;
+    color: #000000;
+
+}.planes{
+    background-color: #56ba77;
     color: #bfbfbf;
     border-radius:  10px;
     border: 1px solid #bfbfbf;
@@ -23,12 +27,7 @@ QPushButton{
 }
 
 .planes:hover{
-    background-color: #00f7ad;
-}
-
-QPushButton:hover{
-    background-color: #017227;
-    color: #000000;
+    background-color: #7fd49b;
 }
 
 QGroupBox{

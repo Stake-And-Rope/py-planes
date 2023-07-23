@@ -4,8 +4,9 @@ from collections import deque
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from pathlib import Path
 
+global current_gold, current_rank
+current_gold = 100
 
 class PlanesMenu(QWidget):
     def __init__(self):
@@ -21,9 +22,23 @@ class PlanesMenu(QWidget):
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
 
+        """MAKE A HORIZONTAL LAYOUT FOR THE GOLD"""
+        top_gold_layout = QHBoxLayout()
+
+        gold_icon = QLabel()
+        gold_icon.setFixedSize(64, 64)
+        gold_icon.setPixmap(QPixmap(f"../images/menu/gold_icon.png"))
+
+        gold_value = QLabel()
+        gold_value.setText(f"{current_gold} Gold")
+        gold_value.setFont(QFont(fonts[0], 16))
+
+        top_gold_layout.addWidget(gold_icon)
+        top_gold_layout.addWidget(gold_value)
+
         """ADD THE LAYOUTS - ONE AT THE TOP, ONE AT THE BOTTOM AND ONE MAIN LAYOUT FOR BOTH"""
         top_layout = QVBoxLayout()        
-        bottom_layout = QHBoxLayout()
+        bottom_layout = QVBoxLayout()
         bottom_layout.addStretch()
         bottom_layout.addSpacing(10)
         
@@ -53,10 +68,18 @@ class PlanesMenu(QWidget):
         top_layout.addStretch()
         top_layout.addSpacing(10)
 
+        """MAKE THE LAYOUT FOR THE PLANE'S INFO LABEL"""
+        layout_for_plane_info_name = QVBoxLayout()
+        plane_info_name_label = QLabel()
+        plane_info_name_label.setText("Plane's info")
+        plane_info_name_label.setFont(QFont(fonts[0], 12))
+        layout_for_plane_info_name.addWidget(plane_info_name_label)
+        layout_for_plane_info_name.addSpacing(-25)
+
         """MAKE THE BUTTONS FOR THE BOTTOM LAYOUT"""
         plane_info_groupbox = QGroupBox()
         plane_info_groupbox.setFixedWidth(300)
-        plane_info_groupbox.setFixedHeight(100)
+        plane_info_groupbox.setFixedHeight(120)
         plane_info_layout = QHBoxLayout()
 
 
@@ -85,15 +108,16 @@ class PlanesMenu(QWidget):
         bottom_grid_layout.addWidget(start_button, 0, 2)
         bottom_grid_layout.setVerticalSpacing(20)
 
-
         bottom_layout.addLayout(bottom_grid_layout)
         bottom_layout.addStretch(10)
         bottom_layout.addSpacing(20)
         top_layout.addStretch(10)
-        top_layout.addSpacing(20)
-        planes_menu_main_layout.addLayout(top_layout)
-        planes_menu_main_layout.addLayout(bottom_layout)
+        top_layout.addSpacing(0)
 
+        planes_menu_main_layout.addLayout(top_gold_layout)
+        planes_menu_main_layout.addLayout(top_layout)
+        planes_menu_main_layout.addLayout(layout_for_plane_info_name)
+        planes_menu_main_layout.addLayout(bottom_layout)
 
         self.setLayout(planes_menu_main_layout)
 
