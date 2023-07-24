@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from game.planes.base_plane import BasePlane
 
 
