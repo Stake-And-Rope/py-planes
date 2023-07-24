@@ -12,7 +12,7 @@ class BasePlane(ABC):
                  model: str,
                  fly_speed: float):
 
-        self.model = pg.image.load(model)
+        self.model = pg.image.load(model).convert_alpha()
         self.fly_speed = fly_speed
         self.x_pos = None
         self.y_pos = None
