@@ -13,8 +13,7 @@ QPushButton{
 QPushButton:hover{
     background-color: #017227;
     color: #000000;
-<<<<<<< HEAD
-=======
+
 
 }.planes{
     background-color: #56ba77;
@@ -30,7 +29,7 @@ QPushButton:hover{
 
 .planes:hover{
     background-color: #7fd49b;
->>>>>>> d3d83ea031c5c26faa6cf9c9ab17e83f930417f8
+
 }
 
 QGroupBox{
