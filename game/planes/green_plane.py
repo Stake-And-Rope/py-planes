@@ -9,3 +9,4 @@ class GreenPlane(BasePlane):
                  model: str,
                  fly_speed: float):
         super().__init__(model, fly_speed)
+
