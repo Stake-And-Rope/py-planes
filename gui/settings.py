@@ -25,12 +25,6 @@ from pathlib import Path
 
 sys.path.append(r'..')
 
-def read_username():
-    user_settings_file = open(r'../settings/user_settings.json')
-    user_data = json.load(user_settings_file)
-    return user_data['username']
-    
-    
 
 class SettingsMenu(QWidget):
     def __init__(self):
@@ -92,11 +86,13 @@ class SettingsMenu(QWidget):
         fps_menu.setFixedSize(70, 30)
         
         music_vol_slider = QSlider(Qt.Horizontal)
+        music_vol_slider.setValue()
         music_vol_slider.setTickInterval(20)
         music_vol_slider.setFocusPolicy(Qt.StrongFocus)
         music_vol_slider.setTickPosition(QSlider.TicksBothSides)
         music_vol_slider.setSingleStep(1)
         music_vol_slider.setFixedWidth(200)
+        # print(music_vol_slider.value())
 
         effects_vol_slider = QSlider(Qt.Horizontal)
         effects_vol_slider.setTickInterval(20)
@@ -118,10 +114,33 @@ class SettingsMenu(QWidget):
         
         main_horizontal_layout.addLayout(left_vertrical_layout)
         main_horizontal_layout.addLayout(right_vertrical_layout)
+        
+        
+        """BUTTONS LAYOUT"""
+        main_buttons_layout = QVBoxLayout()
+        main_buttons_layout.addStretch()
+        main_buttons_layout.addSpacing(10)
+        main_buttons_layout.setAlignment(Qt.AlignCenter)
+        
+        save_settings_button = QPushButton()
+        save_settings_button.setText("Save Settings")
+        save_settings_button.setFont(QFont(fonts[0], 18))
+        save_settings_button.setFixedSize(300, 50)
+        
+        back_button = QPushButton()
+        back_button.setText("Back to Main Menu")
+        back_button.setFont(QFont(fonts[0], 18))
+        back_button.setFixedSize(300, 50)
+        
+        main_buttons_layout.addWidget(save_settings_button)
+        main_buttons_layout.addWidget(back_button)
                 
         main_layout = QVBoxLayout()
+        main_layout.addStretch()
+        main_layout.addSpacing(20)
         # main_layout.setAlignment(Qt.AlignCenter)
         main_layout.addLayout(main_horizontal_layout)
+        main_layout.addLayout(main_buttons_layout)
         self.setLayout(main_layout)
         self.show()
         
