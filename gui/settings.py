@@ -38,87 +38,82 @@ class SettingsMenu(QWidget):
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
         
-        """FPS CONTROLS"""
-        fps_layout = QHBoxLayout()
-        fps_layout.addStretch()
-        fps_layout.addSpacing(10)
-        fps_layout.setSpacing(150)
+        """MAIN HORIZONTAL LAYOUT"""
+        main_horizontal_layout = QHBoxLayout()
+        main_horizontal_layout.addStretch()
+        main_horizontal_layout.addSpacing(-250)
+        # main_horizontal_layout.setAlignment(Qt.AlignCenter)
+        
+        """LEFT VERTICAL LAYOUT"""
+        left_vertrical_layout = QVBoxLayout()
+        left_vertrical_layout.setAlignment(Qt.AlignCenter)
         
         fps_label = QLabel()
         fps_label.setText('FPS')
         fps_label.setFont(QFont(fonts[0], 20))
-        # fps_label.setAlignment(Qt.AlignRight)
-        
-        fps_menu = QComboBox()
-        fps_menu.addItems(["45", "60", "75"])
-        fps_menu.setFont(QFont(fonts[0], 20))
-        fps_menu.setFixedSize(70, 40)
-        
-        fps_layout.addWidget(fps_label)
-        fps_layout.addWidget(fps_menu)
-        # fps_layout.setAlignment(Qt.AlignCenter)
-        fps_layout.addStretch()
-        fps_layout.addSpacing(10)
-        fps_layout.setSpacing(150)
-        
-        """MUSIC VOLUME CONTROLS"""
-        music_vol_layout = QHBoxLayout()
-        music_vol_layout.addStretch()
-        music_vol_layout.addSpacing(20)
-        music_vol_layout.setSpacing(97)
+        fps_label.setAlignment(Qt.AlignCenter)    
         
         music_vol_label = QLabel()
         music_vol_label.setText("Music Volume")
         music_vol_label.setFont(QFont(fonts[0], 20))
-        music_vol_label.setAlignment(Qt.AlignCenter)
-    
+        music_vol_label.setAlignment(Qt.AlignCenter)        
+        
+        effects_vol_label = QLabel()
+        effects_vol_label.setText("Effects Volume")
+        effects_vol_label.setFont(QFont(fonts[0], 20))
+        effects_vol_label.setAlignment(Qt.AlignCenter)        
+        
+        user_name_label = QLabel()
+        user_name_label.setAlignment(Qt.AlignCenter)
+        user_name_label.setText("Username")
+        user_name_label.setFont(QFont(fonts[0], 20))
+        
+        left_vertrical_layout.addWidget(fps_label)
+        left_vertrical_layout.addWidget(music_vol_label)
+        left_vertrical_layout.addWidget(effects_vol_label)
+        left_vertrical_layout.addWidget(user_name_label)
+        
+        """RIGHT VERTICAL LAYOUT"""
+        right_vertrical_layout = QVBoxLayout()
+        right_vertrical_layout.setAlignment(Qt.AlignCenter)
+        
+        fps_menu = QComboBox()
+        fps_menu.addItems(["45", "60", "75"])
+        fps_menu.setFont(QFont(fonts[0], 20))
+        fps_menu.setFixedSize(70, 30)
+        
         music_vol_slider = QSlider(Qt.Horizontal)
         music_vol_slider.setTickInterval(20)
         music_vol_slider.setFocusPolicy(Qt.StrongFocus)
         music_vol_slider.setTickPosition(QSlider.TicksBothSides)
         music_vol_slider.setSingleStep(1)
         music_vol_slider.setFixedWidth(200)
-        
-        music_vol_layout.addWidget(music_vol_label)
-        music_vol_layout.addWidget(music_vol_slider)
-        music_vol_layout.setAlignment(Qt.AlignCenter)
-        music_vol_layout.addStretch()
-        music_vol_layout.addSpacing(20)
-        music_vol_layout.setSpacing(97)
-        
-        """EFFECTS VOLUME CONTROLS"""
-        effects_vol_layout = QHBoxLayout()
-        effects_vol_layout.addStretch()
-        effects_vol_layout.addSpacing(20)
-        effects_vol_layout.setSpacing(80)
-        
-        effects_vol_label = QLabel()
-        effects_vol_label.setText("Effects Volume")
-        effects_vol_label.setFont(QFont(fonts[0], 20))
-        effects_vol_label.setAlignment(Qt.AlignCenter)
-        
+
         effects_vol_slider = QSlider(Qt.Horizontal)
         effects_vol_slider.setTickInterval(20)
         effects_vol_slider.setFocusPolicy(Qt.StrongFocus)
         effects_vol_slider.setTickPosition(QSlider.TicksBothSides)
         effects_vol_slider.setSingleStep(1)
         effects_vol_slider.setFixedWidth(200)
+
+        user_name_textbox = QLineEdit()
+        user_name_textbox.setFont(QFont(fonts[0], 20))
+        user_name_textbox.setFixedSize(200, 40)
+        user_name_textbox.setAlignment(Qt.AlignCenter)
+
+        right_vertrical_layout.addWidget(fps_menu)
+        right_vertrical_layout.addWidget(music_vol_slider)
+        right_vertrical_layout.addWidget(effects_vol_slider)
+        right_vertrical_layout.addWidget(user_name_textbox)
         
-        effects_vol_layout.addWidget(effects_vol_label)
-        effects_vol_layout.addWidget(effects_vol_slider)
-        effects_vol_layout.setAlignment(Qt.AlignCenter)
-        effects_vol_layout.addStretch()
-        effects_vol_layout.addSpacing(20)
         
+        main_horizontal_layout.addLayout(left_vertrical_layout)
+        main_horizontal_layout.addLayout(right_vertrical_layout)
+                
         
         main_layout = QVBoxLayout()
-        main_layout.addStretch(0)
-        main_layout.addSpacing(100)
-        main_layout.addLayout(fps_layout)
-        main_layout.addLayout(music_vol_layout)
-        main_layout.addLayout(effects_vol_layout)
-        main_layout.addStretch(0)
-        main_layout.addSpacing(100)
+        # main_layout.setAlignment(Qt.AlignCenter)
+        main_layout.addLayout(main_horizontal_layout)
         self.setLayout(main_layout)
         self.show()
         

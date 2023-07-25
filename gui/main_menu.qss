@@ -1,21 +1,5 @@
-QPushButton{
-    background-color: #004d1a;
-    color: #bfbfbf;
-    border-radius: 4px;
-    border: 1px solid #bfbfbf;
-    border-bottom: 4px solid #000000;
-    border-right: 4px solid #000000;
-    padding: 2px 2px;
-    margin-top: 2px;
-    outline: 0px;
-}
 
-QPushButton:hover{
-    background-color: #017227;
-    color: #000000;
-
-
-}.planes{
+.planes { 
     background-color: #56ba77;
     color: #bfbfbf;
     border-radius:  10px;
@@ -27,12 +11,34 @@ QPushButton:hover{
     outline: 0px;
 }
 
-.planes:hover{
+.planes:hover {
     background-color: #7fd49b;
 
 }
 
-QGroupBox{
+.background {
+    background-image: url(../images/menu/main_menu_background2.jpg);
+}
+
+QPushButton {
+    background-color: #004d1a;
+    color: #bfbfbf;
+    border-radius: 4px;
+    border: 1px solid #bfbfbf;
+    border-bottom: 4px solid #000000;
+    border-right: 4px solid #000000;
+    padding: 2px 2px;
+    margin-top: 2px;
+    outline: 0px;
+}
+
+QPushButton:hover {
+    background-color: #017227;
+    color: #000000;
+}
+
+
+QGroupBox {
     color: #004d1a;
     border: 2px solid #000000;
     border-radius: 4px;
@@ -49,6 +55,3 @@ QGroupBox::title {
     color: #000000;
 }
 
-/* QWidget {
-    background-image: url(../images/menu/main_menu_background2.jpg);
-} */
