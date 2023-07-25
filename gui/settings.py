@@ -20,8 +20,17 @@ from PyQt5.QtWidgets import (QApplication,
                              )
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-import sys, os
+import sys, os, json
 from pathlib import Path
+
+sys.path.append(r'..')
+
+def read_username():
+    user_settings_file = open(r'../settings/user_settings.json')
+    user_data = json.load(user_settings_file)
+    return user_data['username']
+    
+    
 
 class SettingsMenu(QWidget):
     def __init__(self):
@@ -79,7 +88,7 @@ class SettingsMenu(QWidget):
         
         fps_menu = QComboBox()
         fps_menu.addItems(["45", "60", "75"])
-        fps_menu.setFont(QFont(fonts[0], 20))
+        fps_menu.setFont(QFont(fonts[0], 18))
         fps_menu.setFixedSize(70, 30)
         
         music_vol_slider = QSlider(Qt.Horizontal)
@@ -97,8 +106,9 @@ class SettingsMenu(QWidget):
         effects_vol_slider.setFixedWidth(200)
 
         user_name_textbox = QLineEdit()
-        user_name_textbox.setFont(QFont(fonts[0], 20))
-        user_name_textbox.setFixedSize(200, 40)
+        user_name_textbox.setText(read_username())
+        user_name_textbox.setFont(QFont(fonts[0], 18))
+        user_name_textbox.setFixedSize(200, 30)
         user_name_textbox.setAlignment(Qt.AlignCenter)
 
         right_vertrical_layout.addWidget(fps_menu)
@@ -106,11 +116,9 @@ class SettingsMenu(QWidget):
         right_vertrical_layout.addWidget(effects_vol_slider)
         right_vertrical_layout.addWidget(user_name_textbox)
         
-        
         main_horizontal_layout.addLayout(left_vertrical_layout)
         main_horizontal_layout.addLayout(right_vertrical_layout)
                 
-        
         main_layout = QVBoxLayout()
         # main_layout.setAlignment(Qt.AlignCenter)
         main_layout.addLayout(main_horizontal_layout)
