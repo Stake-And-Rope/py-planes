@@ -23,7 +23,9 @@ from PyQt5.QtCore import *
 import sys, os, json
 from pathlib import Path
 
-sys.path.append(r'..')
+sys.path.append('..')
+from settings import settings_handler
+gs = settings_handler.get_game_settings('../settings/game_settings.json')
 
 
 class SettingsMenu(QWidget):
@@ -84,9 +86,11 @@ class SettingsMenu(QWidget):
         fps_menu.addItems(["45", "60", "75"])
         fps_menu.setFont(QFont(fonts[0], 18))
         fps_menu.setFixedSize(70, 30)
+        fps_menu.setCurrentText(gs.get('fps'))
+
         
         music_vol_slider = QSlider(Qt.Horizontal)
-        music_vol_slider.setValue()
+        # music_vol_slider.setValue()
         music_vol_slider.setTickInterval(20)
         music_vol_slider.setFocusPolicy(Qt.StrongFocus)
         music_vol_slider.setTickPosition(QSlider.TicksBothSides)
@@ -102,7 +106,7 @@ class SettingsMenu(QWidget):
         effects_vol_slider.setFixedWidth(200)
 
         user_name_textbox = QLineEdit()
-        user_name_textbox.setText(read_username())
+        # user_name_textbox.setText()
         user_name_textbox.setFont(QFont(fonts[0], 18))
         user_name_textbox.setFixedSize(200, 30)
         user_name_textbox.setAlignment(Qt.AlignCenter)
