@@ -9,3 +9,7 @@ sounds/__pycache__/
 
 # Ignore PyCharm dir
 .idea/
+
+/game/json_test.py
+/game/test_looping_background.py
+/game/test_mask_overlap.py
