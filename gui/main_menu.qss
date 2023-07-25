@@ -49,22 +49,6 @@ QGroupBox::title {
     color: #000000;
 }
 
-.planes{
-    background-color: #f7ff05;
-    color: #bfbfbf;
-    border-radius:  10px;
-    border: 1px solid #bfbfbf;
-    border-bottom: 4px solid #000000;
-    border-right: 4px solid #000000;
-    padding: 2px 2px;
-    margin-top: 2px;
-    outline: 0px;
-}
-
-.planes:hover {
-    background-color: #00f7ad;
-}
-
 /* QWidget {
     background-image: url(../images/menu/main_menu_background2.jpg);
 } */
