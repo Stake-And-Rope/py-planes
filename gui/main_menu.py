@@ -43,7 +43,8 @@ class MainMenu(QWidget):
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
 
-        
+        """BACKGROUND PICTURE"""
+
         
         """ADD CUSTOM FONTS"""
         font = QFontDatabase.addApplicationFont(r'../fonts/American Captain.ttf')
@@ -115,12 +116,15 @@ class MainMenu(QWidget):
         main_buttons_layout.addStretch()
         main_buttons_layout.addSpacing(150)
         
+        
         main_layout = QVBoxLayout()
+        
         main_layout.addStretch(2)
         main_layout.addSpacing(10)
         main_layout.addLayout(gold_layout)
         main_layout.addLayout(rank_layout)
         main_layout.addLayout(main_buttons_layout)
+        main_layout.setProperty("class", "main_menu")
         self.setLayout(main_layout)
         self.show()
 

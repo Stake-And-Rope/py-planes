@@ -14,6 +14,7 @@ QPushButton:hover{
     background-color: #017227;
     color: #000000;
 
+
 }.planes{
     background-color: #56ba77;
     color: #bfbfbf;
@@ -28,6 +29,7 @@ QPushButton:hover{
 
 .planes:hover{
     background-color: #7fd49b;
+
 }
 
 QGroupBox{
@@ -46,3 +48,7 @@ QGroupBox::title {
     /* padding-bottom: 20px; */
     color: #000000;
 }
+
+/* QWidget {
+    background-image: url(../images/menu/main_menu_background2.jpg);
+} */
