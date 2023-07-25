@@ -1,11 +1,11 @@
-from json import (load,
-                  dump,
-                  )
+#!/usr/bin/python3
+
+import json
 
 
 def read_file(filename):
     with open(filename, "r") as file:
-        return load(file)
+        return json.load(file)
 
 
 # def save_file(filename):
@@ -17,20 +17,18 @@ def get_plane_settings():
     """
     :return:  dictionary with the plane settings
     """
-    return read_file("planes_settings.json")
+    pass
 
 
-def get_game_settings():
+def get_game_settings(file):
     """
     :return: dictionary with the game settings
     """
-    return read_file("settings.json")
+    return read_file(file)
 
 
 def overwrite_game_settings(**kwargs):
     pass
-
-
 
 
 
