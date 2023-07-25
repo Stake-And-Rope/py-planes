@@ -21,7 +21,7 @@ def main_menu_music(music, app):
 
     
     player.setVolume(100)
-    player.play()
+    # player.play()
     app.exec()
 
 # main_menu_music()
