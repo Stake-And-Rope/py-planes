@@ -19,7 +19,7 @@ def read_file(path: str):
 
 def save_file(path_to_file, new_data: dict):
     with open(path_to_file, "w") as file:
-        return json.dump(new_data, file, indent=4)
+        json.dump(new_data, file, indent=4)
 
 
 def get_game_settings():
