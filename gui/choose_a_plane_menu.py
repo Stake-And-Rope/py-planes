@@ -9,6 +9,11 @@ sys.path.append(r'.')
 from gui import display_plane_info
 from gui import main_menu
 
+sys.path.append(r"..")
+from settings import settings_handler
+
+
+
 global current_gold, current_rank
 current_gold = 100
 
@@ -20,12 +25,18 @@ class PlanesMenu(QWidget):
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
+        
+        """READ THE PLANES SETTINGS"""
+        ps = settings_handler.get_planes_settings()
 
         def plane_info_display(curr_plane_name):
             plane_info_groupbox.hide()
 
-            current_groupbox = display_plane_info.plane_info_return_groupbox(curr_plane_name)
+            current_groupbox = display_plane_info.plane_info_return_groupbox(read_plane_stats(curr_plane_name))
+            # current_groupbox = display_plane_info.plane_info_return_groupbox(curr_plane_name)
+            bottom_grid_layout.itemAtPosition(0, 0).widget().setParent(None)
             bottom_grid_layout.addWidget(current_groupbox, 0, 0)
+
 
         def open_plane_info(plane_name):
             return lambda: plane_info_display(plane_name)
@@ -64,8 +75,8 @@ class PlanesMenu(QWidget):
         top_grid_layout = QGridLayout()
         top_grid_layout.setSpacing(30)  # spacing between the cells in the gird layout
 
-        all_planes = deque(['base_plane', 'user_plane_1', 'user_plane_2', 'base_plane', 'base_plane', 'base_plane'])
-
+        all_planes = deque(['user_plane_1', 'user_plane_2', 'user_plane_3', 'user_plane_4', 'user_plane_5', 'user_plane_6'])
+        
         for row in range(2):
             for col in range(3):
                 curr_name_plane = all_planes.popleft()
@@ -77,8 +88,8 @@ class PlanesMenu(QWidget):
                 plane_button.setIconSize(QSize(150, 150))
                 plane_button.setFixedSize(140, 140)
                 plane_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
                 plane_button.clicked.connect(open_plane_info(curr_name_plane))
+
 
                 top_grid_layout.addWidget(plane_button, row, col)
 
@@ -131,7 +142,15 @@ class PlanesMenu(QWidget):
         planes_menu_main_layout.addLayout(bottom_layout)
 
         self.setLayout(planes_menu_main_layout)
-
+        
+        def read_plane_stats(plane):
+            plane_stats = ps.get(plane)
+            global result
+            result = []
+            for k,v in plane_stats.items():
+                cur_res = k + " --> " + v
+                result.append(cur_res)
+            return result 
 
 def start_plane_menu_window():
     global plane_menu
