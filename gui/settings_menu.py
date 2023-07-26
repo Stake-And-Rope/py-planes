@@ -23,22 +23,27 @@ from PyQt5.QtCore import *
 import sys, os, json
 from pathlib import Path
 
+sys.path.append(r".")
+from gui import main_menu
 sys.path.append('..')
 from settings import settings_handler
-gs = settings_handler.get_game_settings()
-us = settings_handler.get_user_settings()
+
 
 class SettingsMenu(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Py Planes")
-        self.setWindowIcon(QIcon(r'../images/menu/plane_icon.jpg'))
+        self.setWindowIcon(QIcon(r'images/menu/plane_icon.jpg'))
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
         
+        """READ THE SETTINGS FROM THE JSONs"""
+        gs = settings_handler.get_game_settings()
+        us = settings_handler.get_user_settings()
+        
         """ADD CUSTOM FONTS"""
-        font = QFontDatabase.addApplicationFont(r'../fonts/American Captain.ttf')
+        font = QFontDatabase.addApplicationFont(r'fonts/American Captain.ttf')
         if font < 0:
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
@@ -137,6 +142,7 @@ class SettingsMenu(QWidget):
         back_button.setText("Back to Main Menu")
         back_button.setFont(QFont(fonts[0], 18))
         back_button.setFixedSize(300, 50)
+        back_button.clicked.connect(lambda: back_to_main_menu())
         
         main_buttons_layout.addWidget(save_settings_button)
         main_buttons_layout.addWidget(back_button)
@@ -150,13 +156,16 @@ class SettingsMenu(QWidget):
         self.show()
         
         def save_settings():
-            settings_handler.overwrite_game_settings(**{"fps":fps_menu.currentText(), "music":music_vol_slider.value(), "effects": effects_vol_slider.value()})
+            settings_handler.overwrite_game_settings(**{"fps":fps_menu.currentText(), "music":str(music_vol_slider.value()), "effects": str(effects_vol_slider.value())})
             settings_handler.overwrite_user_settings(**{"username":user_name_textbox.text()})
         
-        
-app = QApplication(sys.argv)
-app.setStyleSheet(Path('main_menu.qss').read_text())
-global main_window
-main_window = SettingsMenu()
-main_window.show()
-app.exec()
+
+def open_settings():
+    global settings_window
+    settings_window = SettingsMenu()
+    settings_window.show()
+    
+def back_to_main_menu():
+    global settings_window
+    settings_window.hide()
+    main_menu.open_main_menu()

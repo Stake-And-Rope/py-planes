@@ -15,7 +15,7 @@
 }
 
 .background {
-    background-image: url(../images/menu/main_menu_background2.jpg);
+    background-image: url(images/menu/main_menu_background2.jpg);
     background-position: right center;
     background-repeat: no-repeat;
     margin: 0px;

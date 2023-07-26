@@ -4,7 +4,10 @@ from collections import deque
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from display_plane_info import plane_info_return_groupbox
+
+sys.path.append(r'.')
+from gui import display_plane_info
+from gui import main_menu
 
 global current_gold, current_rank
 current_gold = 100
@@ -13,6 +16,7 @@ class PlanesMenu(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Planes Menu")
+        self.setWindowIcon(QIcon(r"images/menu/plane_icon.jpg"))
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
@@ -20,14 +24,14 @@ class PlanesMenu(QWidget):
         def plane_info_display(curr_plane_name):
             plane_info_groupbox.hide()
 
-            current_groupbox = plane_info_return_groupbox(curr_plane_name)
+            current_groupbox = display_plane_info.plane_info_return_groupbox(curr_plane_name)
             bottom_grid_layout.addWidget(current_groupbox, 0, 0)
 
         def open_plane_info(plane_name):
             return lambda: plane_info_display(plane_name)
 
         """ADD CUSTOM FONTS"""
-        font = QFontDatabase.addApplicationFont(r'../fonts/American Captain.ttf')
+        font = QFontDatabase.addApplicationFont(r'fonts/American Captain.ttf')
         if font < 0:
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
@@ -37,7 +41,7 @@ class PlanesMenu(QWidget):
 
         gold_icon = QLabel()
         gold_icon.setFixedSize(64, 64)
-        gold_icon.setPixmap(QPixmap(f"../images/menu/gold_icon.png"))
+        gold_icon.setPixmap(QPixmap(f"images/menu/gold_icon.png"))
 
         gold_value = QLabel()
         gold_value.setText(f"{current_gold} Gold")
@@ -65,7 +69,7 @@ class PlanesMenu(QWidget):
         for row in range(2):
             for col in range(3):
                 curr_name_plane = all_planes.popleft()
-                plane_image = f"../images/user_plane_images/{curr_name_plane}.png"
+                plane_image = f"images/user_plane_images/{curr_name_plane}.png"
 
                 plane_button = QPushButton()
                 plane_button.setProperty("class", "planes")
@@ -101,6 +105,7 @@ class PlanesMenu(QWidget):
         back_to_main_menu_button.setFixedWidth(175)
         back_to_main_menu_button.setFixedHeight(50)
         back_to_main_menu_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        back_to_main_menu_button.clicked.connect(lambda: back_to_main_menu())
 
         start_button = QPushButton()
         start_button.setText("Start")
@@ -132,3 +137,8 @@ def start_plane_menu_window():
     global plane_menu
     plane_menu = PlanesMenu()
     plane_menu.show()
+
+def back_to_main_menu():
+    global plane_menu
+    plane_menu.hide()
+    main_menu.open_main_menu()

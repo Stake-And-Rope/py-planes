@@ -21,11 +21,14 @@ from PyQt5.QtCore import *
 import sys, os
 from collections import deque
 from pathlib import Path
-import choose_a_plane_menu
 
+
+sys.path.append(r'.')
+from gui import choose_a_plane_menu
+from gui import settings_menu
 sys.path.append(r'..')
 from sounds.sounds import main_menu_music
-song = r'../sounds/music/main_menu_music.flac'
+song = r'sounds/music/main_menu_music.flac'
 
 
 
@@ -38,7 +41,7 @@ class MainMenu(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Py Planes")
-        self.setWindowIcon(QIcon(r'../images/menu/plane_icon.jpg'))
+        self.setWindowIcon(QIcon(r'images/menu/plane_icon.jpg'))
         self.setGeometry(200, 150, 600, 500)
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
@@ -48,7 +51,7 @@ class MainMenu(QWidget):
         bg_image_groupbox.setProperty("class", "background")
         
         """ADD CUSTOM FONTS"""
-        font = QFontDatabase.addApplicationFont(r'../fonts/American Captain.ttf')
+        font = QFontDatabase.addApplicationFont(r'fonts/American Captain.ttf')
         if font < 0:
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
@@ -62,7 +65,7 @@ class MainMenu(QWidget):
         
         gold_icon = QLabel()
         gold_icon.setFixedSize(64, 64)
-        gold_icon.setPixmap(QPixmap(r"../images/menu/gold_icon.png"))
+        gold_icon.setPixmap(QPixmap(r"images/menu/gold_icon.png"))
         
         gold_value = QLabel()
         gold_value.setText(f"{current_gold} Gold")
@@ -83,7 +86,7 @@ class MainMenu(QWidget):
         # Read the rank dynamically from the JSON file
         rank_icon = QLabel()
         rank_icon.setFixedSize(64, 64)
-        rank_icon.setPixmap(QPixmap(r"../images/ranks/airman_rank.png"))
+        rank_icon.setPixmap(QPixmap(r"images/ranks/airman_rank.png"))
         
         rank_value = QLabel()
         rank_value.setText(f"{current_rank}")
@@ -107,6 +110,14 @@ class MainMenu(QWidget):
             current_button.setFixedSize(200, 50)
             if button == "Start Game":
                 current_button.clicked.connect(lambda: self.start_game_button_func())
+            if button == "Settings":
+                current_button.clicked.connect(lambda: open_settings_menu())
+            if button == "Credits":
+                pass
+            if button == "Quit Game":
+                current_button.clicked.connect(lambda: app.quit())
+                
+            
             main_buttons_layout.addWidget(current_button)
         main_buttons_layout.addStretch()
         main_buttons_layout.addSpacing(150)
@@ -128,12 +139,23 @@ class MainMenu(QWidget):
     def start_game_button_func(self):
         choose_a_plane_menu.start_plane_menu_window()
         self.hide()
-        
 
-app = QApplication(sys.argv)
-app.setStyleSheet(Path('main_menu.qss').read_text())
-global main_window
-main_window = MainMenu()
-main_window.show()
-# app.exec() # Keep this line commented for now. The app is initiated by the main_menu_music function
-main_menu_music(song, app)
+
+def init_app():
+    global app
+    app = QApplication(sys.argv)
+    app.setStyleSheet(Path('gui/main_menu.qss').read_text())
+    global main_window
+    main_window = MainMenu()
+    main_window.show()
+    # app.exec() # Keep this line commented for now. The app is initiated by the main_menu_music function
+    main_menu_music(song, app)
+    
+def open_main_menu():
+    main_window.show()
+    
+global open_settings_menu
+def open_settings_menu():
+    main_window.hide()
+    settings_menu.open_settings()
+    
