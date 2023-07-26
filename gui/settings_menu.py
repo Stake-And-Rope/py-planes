@@ -131,6 +131,7 @@ class SettingsMenu(QWidget):
         save_settings_button.setText("Save Settings")
         save_settings_button.setFont(QFont(fonts[0], 18))
         save_settings_button.setFixedSize(300, 50)
+        save_settings_button.clicked.connect(lambda: save_settings())
         
         back_button = QPushButton()
         back_button.setText("Back to Main Menu")
@@ -149,8 +150,8 @@ class SettingsMenu(QWidget):
         self.show()
         
         def save_settings():
-            pass
-        
+            settings_handler.overwrite_game_settings(**{"fps":fps_menu.currentText(), "music":music_vol_slider.value(), "effects": effects_vol_slider.value()})
+            settings_handler.overwrite_user_settings(**{"username":user_name_textbox.text()})
         
         
 app = QApplication(sys.argv)
