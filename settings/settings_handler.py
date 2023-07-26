@@ -27,7 +27,7 @@ def get_game_settings():
     :return: dictionary with the game settings information
     """
 
-    path_to_file = f"{get_relative_path_to_settings()}\game_settings.json"
+    path_to_file = f"{get_relative_path_to_settings()}/game_settings.json"
     return read_file(path_to_file)
 
 
@@ -36,7 +36,7 @@ def get_planes_settings():
     :return: dictionary with the planes settings information
     """
 
-    path_to_file = f"{get_relative_path_to_settings()}\planes_settings.json"
+    path_to_file = f"{get_relative_path_to_settings()}/planes_settings.json"
     return read_file(path_to_file)
 
 
@@ -45,7 +45,7 @@ def get_user_settings():
     :return: dictionary with the user settings information
     """
 
-    path_to_file = f"{get_relative_path_to_settings()}\\user_settings.json"
+    path_to_file = f"{get_relative_path_to_settings()}/user_settings.json"
     return read_file(path_to_file)
 
 
@@ -65,7 +65,7 @@ def overwrite_game_settings(**new_settings):
 
         data[key] = new_settings[key]
 
-    save_file(f"{get_relative_path_to_settings()}\game_settings.json",
+    save_file(f"{get_relative_path_to_settings()}/game_settings.json",
               data
               )
 
@@ -86,6 +86,6 @@ def overwrite_user_settings(**new_settings):
 
         data[key] = new_settings[key]
 
-    save_file(f"{get_relative_path_to_settings()}\\user_settings.json",
+    save_file(f"{get_relative_path_to_settings()}/user_settings.json",
               data
               )

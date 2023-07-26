@@ -25,8 +25,8 @@ from pathlib import Path
 
 sys.path.append('..')
 from settings import settings_handler
-gs = settings_handler.get_game_settings('../settings/game_settings.json')
-
+gs = settings_handler.get_game_settings()
+us = settings_handler.get_user_settings()
 
 class SettingsMenu(QWidget):
     def __init__(self):
@@ -90,7 +90,7 @@ class SettingsMenu(QWidget):
 
         
         music_vol_slider = QSlider(Qt.Horizontal)
-        # music_vol_slider.setValue()
+        music_vol_slider.setValue(int(gs.get('music')))
         music_vol_slider.setTickInterval(20)
         music_vol_slider.setFocusPolicy(Qt.StrongFocus)
         music_vol_slider.setTickPosition(QSlider.TicksBothSides)
@@ -99,6 +99,7 @@ class SettingsMenu(QWidget):
         # print(music_vol_slider.value())
 
         effects_vol_slider = QSlider(Qt.Horizontal)
+        effects_vol_slider.setValue(int(gs.get('effects')))
         effects_vol_slider.setTickInterval(20)
         effects_vol_slider.setFocusPolicy(Qt.StrongFocus)
         effects_vol_slider.setTickPosition(QSlider.TicksBothSides)
@@ -106,7 +107,7 @@ class SettingsMenu(QWidget):
         effects_vol_slider.setFixedWidth(200)
 
         user_name_textbox = QLineEdit()
-        # user_name_textbox.setText()
+        user_name_textbox.setText(us.get("username"))
         user_name_textbox.setFont(QFont(fonts[0], 18))
         user_name_textbox.setFixedSize(200, 30)
         user_name_textbox.setAlignment(Qt.AlignCenter)
@@ -142,11 +143,13 @@ class SettingsMenu(QWidget):
         main_layout = QVBoxLayout()
         main_layout.addStretch()
         main_layout.addSpacing(20)
-        # main_layout.setAlignment(Qt.AlignCenter)
         main_layout.addLayout(main_horizontal_layout)
         main_layout.addLayout(main_buttons_layout)
         self.setLayout(main_layout)
         self.show()
+        
+        def save_settings():
+            pass
         
         
         
