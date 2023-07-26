@@ -2,7 +2,7 @@
 
 import pygame as pg
 import sys
-from settings.settings_handler import SettingsHandler
+from settings.settings_handler import get_game_settings
 from game import helpers
 from planes.green_plane import GreenPlane
 
@@ -13,10 +13,9 @@ pg.init()
 window_size = (900, 800)
 screen = pg.display.set_mode(window_size)
 
-settings = SettingsHandler()
-user_settings = settings.get_json_data()
+user_settings = get_game_settings()
 
-fps = user_settings.get("fps")
+fps = int(user_settings.get("fps"))
 plane_speed = helpers.get_plane_speed(fps)
 
 green_plane = GreenPlane(
