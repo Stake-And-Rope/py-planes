@@ -30,10 +30,8 @@ class PlanesMenu(QWidget):
         ps = settings_handler.get_planes_settings()
 
         def plane_info_display(curr_plane_name):
-            plane_info_groupbox.hide()
-
+            # plane_info_groupbox.hide()
             current_groupbox = display_plane_info.plane_info_return_groupbox(read_plane_stats(curr_plane_name))
-            # current_groupbox = display_plane_info.plane_info_return_groupbox(curr_plane_name)
             bottom_grid_layout.itemAtPosition(0, 0).widget().setParent(None)
             bottom_grid_layout.addWidget(current_groupbox, 0, 0)
 

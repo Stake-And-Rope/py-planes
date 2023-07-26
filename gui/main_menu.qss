@@ -39,6 +39,9 @@ QPushButton:hover {
     color: #000000;
 }
 
+QPushButton:focus {
+    background-color: #ff0000;
+}
 
 QGroupBox {
     color: #004d1a;
