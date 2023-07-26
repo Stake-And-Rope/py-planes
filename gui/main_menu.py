@@ -43,7 +43,7 @@ class MainMenu(QWidget):
         self.setMaximumWidth(600)
         self.setMaximumHeight(500)
 
-        """BACKGROUND PICTURE"""
+        """BACKGROUND PICTURE GROUPBOX"""
         bg_image_groupbox = QGroupBox()
         bg_image_groupbox.setProperty("class", "background")
         
@@ -94,12 +94,10 @@ class MainMenu(QWidget):
         
         rank_layout.addLayout(rank_horizontal_layout)
         
-        
         """BUTTONS LAYOUT"""
         main_buttons_layout = QVBoxLayout()
         main_buttons_layout.setAlignment(Qt.AlignCenter)
         buttons = deque(["Start Game", "Settings", "Credits", "Quit Game"])
-        
         
         for i in range(4):
             current_button = QPushButton()
@@ -107,30 +105,24 @@ class MainMenu(QWidget):
             current_button.setText(button)
             current_button.setFont(QFont(fonts[0], 20))
             current_button.setFixedSize(200, 50)
-
             if button == "Start Game":
                 current_button.clicked.connect(lambda: self.start_game_button_func())
-
-            
             main_buttons_layout.addWidget(current_button)
-        
         main_buttons_layout.addStretch()
         main_buttons_layout.addSpacing(150)
-        
+
+        main_menu_layout = QVBoxLayout()
+        main_menu_layout.addStretch(2)
+        main_menu_layout.addSpacing(10)
+        main_menu_layout.addLayout(gold_layout)
+        main_menu_layout.addLayout(rank_layout)
+        main_menu_layout.addLayout(main_buttons_layout)
+        bg_image_groupbox.setLayout(main_menu_layout)
         
         main_layout = QVBoxLayout()
-
-        
-        
-        main_layout.addStretch(2)
-        main_layout.addSpacing(10)
-        main_layout.addLayout(gold_layout)
-        main_layout.addLayout(rank_layout)
-        main_layout.addLayout(main_buttons_layout)
-        main_layout.setProperty("class", "main_menu")
-        bg_image_groupbox.setLayout(main_layout)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.addWidget(bg_image_groupbox)
         self.setLayout(main_layout)
-
         self.show()
 
     def start_game_button_func(self):
