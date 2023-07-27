@@ -133,15 +133,17 @@ class SettingsMenu(QWidget):
         main_buttons_layout.setAlignment(Qt.AlignCenter)
         
         save_settings_button = QPushButton()
+        save_settings_button.setProperty("class", "menu_button")
         save_settings_button.setText("Save Settings")
         save_settings_button.setFont(QFont(fonts[0], 18))
-        save_settings_button.setFixedSize(300, 50)
+        save_settings_button.setFixedSize(200, 50)
         save_settings_button.clicked.connect(lambda: save_settings())
         
         back_button = QPushButton()
+        back_button.setProperty("class", "menu_button")
         back_button.setText("Back to Main Menu")
         back_button.setFont(QFont(fonts[0], 18))
-        back_button.setFixedSize(300, 50)
+        back_button.setFixedSize(200, 50)
         back_button.clicked.connect(lambda: back_to_main_menu())
         
         main_buttons_layout.addWidget(save_settings_button)

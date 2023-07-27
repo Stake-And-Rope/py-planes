@@ -109,6 +109,7 @@ class PlanesMenu(QWidget):
         plane_info_groupbox.setFixedHeight(120)
 
         back_to_main_menu_button = QPushButton()
+        back_to_main_menu_button.setProperty("class", "menu_button")
         back_to_main_menu_button.setText("Back to Main Menu")
         back_to_main_menu_button.setFont(QFont(fonts[0], 15))
         back_to_main_menu_button.setFixedWidth(175)
@@ -117,6 +118,7 @@ class PlanesMenu(QWidget):
         back_to_main_menu_button.clicked.connect(lambda: back_to_main_menu())
 
         start_button = QPushButton()
+        start_button.setProperty("class", "menu_button")
         start_button.setText("Start")
         start_button.setFont(QFont(fonts[0], 15))
         start_button.setFixedWidth(80)
