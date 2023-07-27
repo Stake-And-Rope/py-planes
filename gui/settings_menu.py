@@ -1,22 +1,15 @@
 #!/usr/bin/python3
 
 """IMPORT PyQt5 ENGINE"""
-from PyQt5.QtWidgets import (QApplication,
-                             QWidget,
+from PyQt5.QtWidgets import (QWidget,
                              QPushButton,
-                             QGridLayout,
                              QLabel,
-                             QFrame,
                              QSlider,
                              QGroupBox,
                              QLineEdit,
-                             QMessageBox,
                              QComboBox,
-                             QPlainTextEdit,
                              QHBoxLayout,
                              QVBoxLayout,
-                             QGraphicsDropShadowEffect,
-                             QGraphicsOpacityEffect,
                              )
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -42,6 +35,10 @@ class SettingsMenu(QWidget):
         gs = settings_handler.get_game_settings()
         us = settings_handler.get_user_settings()
         
+        """BACKGROUND PICTURE GROUPBOX"""
+        bg_image_groupbox = QGroupBox()
+        bg_image_groupbox.setProperty("class", "settings_background")
+        
         """ADD CUSTOM FONTS"""
         font = QFontDatabase.addApplicationFont(r'fonts/American Captain.ttf')
         if font < 0:
@@ -60,20 +57,24 @@ class SettingsMenu(QWidget):
         
         fps_label = QLabel()
         fps_label.setText('FPS')
+        fps_label.setProperty("class", "settings_text")
         fps_label.setFont(QFont(fonts[0], 20))
         fps_label.setAlignment(Qt.AlignCenter)    
         
         music_vol_label = QLabel()
         music_vol_label.setText("Music Volume")
+        music_vol_label.setProperty("class", "settings_text")
         music_vol_label.setFont(QFont(fonts[0], 20))
         music_vol_label.setAlignment(Qt.AlignCenter)        
         
         effects_vol_label = QLabel()
         effects_vol_label.setText("Effects Volume")
+        effects_vol_label.setProperty("class", "settings_text")
         effects_vol_label.setFont(QFont(fonts[0], 20))
         effects_vol_label.setAlignment(Qt.AlignCenter)        
         
         user_name_label = QLabel()
+        user_name_label.setProperty("class", "settings_text")
         user_name_label.setAlignment(Qt.AlignCenter)
         user_name_label.setText("Username")
         user_name_label.setFont(QFont(fonts[0], 20))
@@ -149,11 +150,16 @@ class SettingsMenu(QWidget):
         main_buttons_layout.addWidget(save_settings_button)
         main_buttons_layout.addWidget(back_button)
                 
+        main_settings_layout = QVBoxLayout()
+        main_settings_layout.addStretch()
+        main_settings_layout.addSpacing(20)
+        main_settings_layout.addLayout(main_horizontal_layout)
+        main_settings_layout.addLayout(main_buttons_layout)
+        bg_image_groupbox.setLayout(main_settings_layout)
+        
         main_layout = QVBoxLayout()
-        main_layout.addStretch()
-        main_layout.addSpacing(20)
-        main_layout.addLayout(main_horizontal_layout)
-        main_layout.addLayout(main_buttons_layout)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.addWidget(bg_image_groupbox)
         self.setLayout(main_layout)
         self.show()
         

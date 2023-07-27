@@ -25,6 +25,18 @@
     border: 0px;
 }
 
+.settings_background {
+    background-image: url(images/menu/settings_background.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
+}
+
+.settings_text {
+    color: #bfbfbf;
+}
+
 .menu_button {
     background-image: url(images/menu/button_background.png);
     background-position: center;
