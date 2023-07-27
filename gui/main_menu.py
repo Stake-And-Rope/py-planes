@@ -58,8 +58,8 @@ class MainMenu(QWidget):
         
         """DISPLAY THE USER'S GOLD"""
         gold_layout = QVBoxLayout()
-        gold_layout.addStretch()
-        gold_layout.addSpacing(2)
+        # gold_layout.addStretch()
+        gold_layout.addSpacing(0)
         
         gold_horizontal_layout = QHBoxLayout()
         
@@ -78,8 +78,8 @@ class MainMenu(QWidget):
         
         """DISPLAY USER RANK"""
         rank_layout = QVBoxLayout()
-        rank_layout.addStretch()
-        rank_layout.addSpacing(10)
+        # rank_layout.addStretch()
+        # rank_layout.addSpacing(10)
         
         rank_horizontal_layout = QHBoxLayout()
         
@@ -96,6 +96,7 @@ class MainMenu(QWidget):
         rank_horizontal_layout.addWidget(rank_value)
         
         rank_layout.addLayout(rank_horizontal_layout)
+        rank_layout.addStretch()
         
         """BUTTONS LAYOUT"""
         main_buttons_layout = QVBoxLayout()
@@ -104,6 +105,7 @@ class MainMenu(QWidget):
         
         for i in range(4):
             current_button = QPushButton()
+            current_button.setProperty("class", "menu_button")
             button = buttons.popleft()
             current_button.setText(button)
             current_button.setFont(QFont(fonts[0], 20))
@@ -119,12 +121,12 @@ class MainMenu(QWidget):
                 
             
             main_buttons_layout.addWidget(current_button)
-        main_buttons_layout.addStretch()
-        main_buttons_layout.addSpacing(150)
+        main_buttons_layout.addStretch(10)
+        main_buttons_layout.addSpacing(20)
 
         main_menu_layout = QVBoxLayout()
-        main_menu_layout.addStretch(2)
-        main_menu_layout.addSpacing(10)
+        # main_menu_layout.addStretch()
+        # main_menu_layout.addSpacing(0)
         main_menu_layout.addLayout(gold_layout)
         main_menu_layout.addLayout(rank_layout)
         main_menu_layout.addLayout(main_buttons_layout)

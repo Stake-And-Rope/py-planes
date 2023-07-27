@@ -1,10 +1,13 @@
 .planes { 
-    background-color: #56ba77;
+    background-image: url(images/menu/planes_background.jpg);
+    background-position: right center;
+    background-repeat: no-repeat;
+    /* background-color: #56ba77; */
     color: #bfbfbf;
     border-radius:  10px;
     border: 1px solid #bfbfbf;
-    border-bottom: 4px solid #000000;
-    border-right: 4px solid #000000;
+    border-bottom: 3px solid #237204;
+    border-right: 3px solid #237204;
     padding: 2px 2px;
     margin-top: 2px;
     outline: 0px;
@@ -22,38 +25,38 @@
     border: 0px;
 }
 
-QPushButton {
-    background-color: #004d1a;
+.menu_button {
+    background-image: url(images/menu/button_background.png);
+    background-position: center;
+    background-repeat: no-repeat;
     color: #bfbfbf;
-    border-radius: 4px;
-    border: 1px solid #bfbfbf;
-    border-bottom: 4px solid #000000;
-    border-right: 4px solid #000000;
-    padding: 2px 2px;
-    margin-top: 2px;
-    outline: 0px;
+    border-radius: 2px;
+    border: 4px solid #bfbfbf;
+    border-bottom: 0px solid #000000;
+    border-right: 0px solid #000000;
+    padding: -10px -10px;
+    margin: -10px;
+    outline: -10px;
 }
 
-QPushButton:hover {
-    background-color: #017227;
-    color: #000000;
+.menu_button:hover {
+    background-image: url(images/menu/button_background_hover.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
 }
 
-QPushButton:focus {
-    background-color: #ff0000;
+.menu_button:pressed {
+    border: 200px;
+    background-color: #000000;
 }
 
-QGroupBox {
+/* .menu_button {
     color: #004d1a;
     border: 2px solid #000000;
     border-radius: 4px;
-    /* padding: 14px 10px 10px 10px; color: #9c0808; */
     margin-top: 3ex;
-}
+} */
 
-QGroupBox::title {
-    padding: -10px 5px 5px 5px;
-    margin-top: -20px;
-    color: #000000;
-}
+
 
