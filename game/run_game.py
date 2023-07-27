@@ -2,15 +2,18 @@
 
 import pygame as pg
 import sys
+
+from game.background_loop import BackgroundLoop
+from game.planes.base_plane import Plane
 from settings.settings_handler import get_game_settings
 from game import helpers
-from planes.green_plane import GreenPlane
+
 
 
 sys.path.append(r'..')
 pg.init()
 
-window_size = (900, 800)
+window_size = helpers.get_screen_dimensions()
 screen = pg.display.set_mode(window_size)
 
 user_settings = get_game_settings()
@@ -18,11 +21,20 @@ user_settings = get_game_settings()
 fps = int(user_settings.get("fps"))
 plane_speed = helpers.get_plane_speed(fps)
 
-green_plane = GreenPlane(
-    '../images/user_plane_images/base_plane.png',
+
+green_plane = Plane(
+    '../images/user_plane_images/user_plane_1.png',
     plane_speed
-)
-green_plane.set_spawn_point(250, 250)
+    )
+
+green_plane.set_spawn_point(
+    helpers.calculate_center(window_size[0], green_plane.model.get_width()),
+    650
+    )
+
+
+background = BackgroundLoop(fps)
+
 
 clock = pg.time.Clock()
 
@@ -38,11 +50,10 @@ while running:
             if event.key == pg.K_ESCAPE:
                 running = False
 
-    screen.fill((255, 255, 255))
+    background.loop_background(screen)
 
     green_plane.plane_movement()
-
-    screen.blit(green_plane.model, green_plane.get_plane_pos)
+    green_plane.display_plane(screen)
 
     pg.display.flip()
 
