@@ -11,6 +11,4 @@ sounds/__pycache__/
 .idea/
 
 # for testing purposes
-/game/json_test.py
-/game/test_looping_background.py
 /game/test_mask_overlap.py
