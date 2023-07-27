@@ -2,12 +2,17 @@
 
 import pygame as pg
 
+from game.bullet import Bullet
 from game.helpers import get_screen_dimensions
+from settings.settings_handler import get_game_settings
 
+GAME_FPS = int(get_game_settings().get("fps"))
+SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 
 class Plane:
     LEFT_RIGHT_KEYS = ("a", "d")
     UP_DOWN_KEYS = ("w", "s")
+    SHOOT_BUTTON = " "
 
     def __init__(self,
                  model: str,
@@ -21,10 +26,20 @@ class Plane:
         self.x_pos = None
         self.y_pos = None
 
+        self.shooting_cooldown = 0
+        self.bullets = []
+
+    @property
+    def get_shoot_cd(self):
+        return 0.5
+
+    @property
+    def can_shoot_bullet(self):
+        return self.shooting_cooldown <= 0
+
     @property
     def middle_screen_border(self):
-        height = get_screen_dimensions()[1]
-        return height // 2.5
+        return SCREEN_HEIGHT // 2.5
 
     @property
     def get_plane_pos(self):
@@ -86,10 +101,9 @@ class Plane:
 
         if out of border, the plane will get returned in the border.
         """
-        screen_width, screen_height = get_screen_dimensions()
 
-        right_border = screen_width - self.width
-        bottom_border = screen_height - self.height
+        right_border = SCREEN_WIDTH - self.width
+        bottom_border = SCREEN_HEIGHT - self.height
 
         if self.x_pos < 0:
             self.x_pos = 0
@@ -103,9 +117,10 @@ class Plane:
         elif self.y_pos > bottom_border:
             self.y_pos = bottom_border
 
-    def plane_movement(self):
+    def plane_functionality(self):
         """
         updates the coordinates of the plane if the correct keys are pressed
+        shoots bullets if the correct button is pressed and if there is no cooldown
         """
         button_press = pg.key.get_pressed()
 
@@ -117,3 +132,27 @@ class Plane:
                 self.y_pos += self.move_directions[button]
 
             self.check_plane_boundaries()
+
+        if button_press[pg.key.key_code(self.SHOOT_BUTTON)] and self.can_shoot_bullet:
+            self.shoot_bullet()
+
+        if not self.can_shoot_bullet:
+            self.lower_shoot_cooldown()
+
+    def lower_shoot_cooldown(self):
+        self.shooting_cooldown -= 1 / GAME_FPS
+
+        if self.can_shoot_bullet:
+            self.shooting_cooldown = 0
+
+    def shoot_bullet(self):
+        self.bullets.append(Bullet(*self.get_plane_pos))
+        self.shooting_cooldown = self.get_shoot_cd
+
+    def update_shot_bullets(self, screen):
+        for bullet in self.bullets:
+            bullet.move_bullet()
+            screen.blit(bullet.image, bullet.get_first_bullet_pos)
+            screen.blit(bullet.image, bullet.get_second_bullet_pos)
+
+        self.bullets = [bullet for bullet in self.bullets if bullet.bullet_y > 0]

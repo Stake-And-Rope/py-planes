@@ -46,14 +46,12 @@ while running:
         if event.type == pg.QUIT:
             running = False
 
-        elif event.type == pg.KEYDOWN:
-            if event.key == pg.K_ESCAPE:
-                running = False
-
     background.loop_background(screen)
 
-    green_plane.plane_movement()
+    green_plane.plane_functionality()
     green_plane.display_plane(screen)
+
+    green_plane.update_shot_bullets(screen)
 
     pg.display.flip()
 
