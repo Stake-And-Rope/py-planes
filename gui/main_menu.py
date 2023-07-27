@@ -15,6 +15,7 @@ from PyQt5.QtWidgets import (QApplication,
                              QVBoxLayout,
                              QGraphicsDropShadowEffect,
                              QGraphicsOpacityEffect,
+                             QSizePolicy
                              )
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -64,7 +65,8 @@ class MainMenu(QWidget):
         gold_horizontal_layout = QHBoxLayout()
         
         gold_icon = QLabel()
-        gold_icon.setFixedSize(64, 64)
+        gold_icon.setFixedSize(50, 50)
+        gold_icon.setScaledContents(True)
         gold_icon.setPixmap(QPixmap(r"images/menu/gold_icon.png"))
         
         gold_value = QLabel()
@@ -85,7 +87,8 @@ class MainMenu(QWidget):
         
         # Read the rank dynamically from the JSON file
         rank_icon = QLabel()
-        rank_icon.setFixedSize(64, 64)
+        rank_icon.setFixedSize(50, 50)
+        rank_icon.setScaledContents(True)
         rank_icon.setPixmap(QPixmap(r"images/ranks/airman_rank.png"))
         
         rank_value = QLabel()

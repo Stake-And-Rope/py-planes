@@ -44,15 +44,21 @@ class PlanesMenu(QWidget):
         if font < 0:
             print('Error loading fonts!')
         fonts = QFontDatabase.applicationFontFamilies(font)
+        
+        """BACKGROUND PICTURE GROUPBOX"""
+        bg_image_groupbox = QGroupBox()
+        bg_image_groupbox.setProperty("class", "choose_plane_background")
 
         """MAKE A HORIZONTAL LAYOUT FOR THE GOLD"""
         top_gold_layout = QHBoxLayout()
 
         gold_icon = QLabel()
-        gold_icon.setFixedSize(64, 64)
+        gold_icon.setFixedSize(50, 50)
+        gold_icon.setScaledContents(True)
         gold_icon.setPixmap(QPixmap(f"images/menu/gold_icon.png"))
 
         gold_value = QLabel()
+        gold_value.setProperty("class", "settings_text")
         gold_value.setText(f"{current_gold} Gold")
         gold_value.setFont(QFont(fonts[0], 16))
 
@@ -105,6 +111,7 @@ class PlanesMenu(QWidget):
 
         """MAKE THE BUTTONS FOR THE BOTTOM LAYOUT"""
         plane_info_groupbox = QGroupBox()
+        # plane_info_groupbox.setProperty("class", "plane_info_panel")
         plane_info_groupbox.setFixedWidth(300)
         plane_info_groupbox.setFixedHeight(120)
 
@@ -128,20 +135,25 @@ class PlanesMenu(QWidget):
         bottom_grid_layout.addWidget(plane_info_groupbox, 0, 0)
         bottom_grid_layout.addWidget(back_to_main_menu_button, 0, 1)
         bottom_grid_layout.addWidget(start_button, 0, 2)
-        bottom_grid_layout.setVerticalSpacing(20)
+        bottom_grid_layout.setVerticalSpacing(-20)
 
         bottom_layout.addLayout(bottom_grid_layout)
         bottom_layout.addStretch(10)
-        bottom_layout.addSpacing(20)
+        bottom_layout.addSpacing(2)
         top_layout.addStretch(10)
         top_layout.addSpacing(0)
 
         planes_menu_main_layout.addLayout(top_gold_layout)
         planes_menu_main_layout.addLayout(top_layout)
-        planes_menu_main_layout.addLayout(layout_for_plane_info_name)
+        # planes_menu_main_layout.addLayout(layout_for_plane_info_name)
         planes_menu_main_layout.addLayout(bottom_layout)
-
-        self.setLayout(planes_menu_main_layout)
+        bg_image_groupbox.setLayout(planes_menu_main_layout)
+        
+        main_layout = QVBoxLayout()
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.addWidget(bg_image_groupbox)
+        self.setLayout(main_layout)
+        self.show()
         
         def read_plane_stats(plane):
             plane_stats = ps.get(plane)

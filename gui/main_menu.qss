@@ -35,6 +35,15 @@
 
 .settings_text {
     color: #bfbfbf;
+
+}
+
+.choose_plane_background {
+    background-image: url(images/menu/planes_menu_background.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
 }
 
 .menu_button {
@@ -63,12 +72,6 @@
     background-color: #000000;
 }
 
-/* .menu_button {
-    color: #004d1a;
-    border: 2px solid #000000;
-    border-radius: 4px;
-    margin-top: 3ex;
-} */
 
 
 

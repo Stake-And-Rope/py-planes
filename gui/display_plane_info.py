@@ -15,17 +15,19 @@ def plane_info_return_groupbox(curr_plane_stats):
     
     print(curr_plane_stats)
     curr_plane_info_groupbox = QGroupBox()
+    curr_plane_info_groupbox.setProperty("class", "plane_info_panel")
     curr_plane_info_groupbox.setFixedWidth(300)
     curr_plane_info_groupbox.setFixedHeight(200)
 
     plane_info_layout = QVBoxLayout()
-    # plane_info_layout.addStretch()
-    # plane_info_layout.addSpacing(0)
+    plane_info_layout.addStretch(-10)
+    plane_info_layout.addSpacing(-10)
 
     for i in curr_plane_stats:
         current_label = QLabel()
+        current_label.setProperty('class', 'settings_text')
         current_label.setText(str(i))
-        current_label.setFont(QFont(fonts[0], 10))
+        current_label.setFont(QFont(fonts[0], 20))
         
         
         plane_info_layout.addWidget(current_label)
