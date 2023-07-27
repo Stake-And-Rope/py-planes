@@ -39,8 +39,7 @@ class Plane:
 
     @property
     def middle_screen_border(self):
-        height = get_screen_dimensions()[1]
-        return height // 2.5
+        return SCREEN_HEIGHT // 2.5
 
     @property
     def get_plane_pos(self):
