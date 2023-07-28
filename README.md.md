@@ -10,24 +10,24 @@ Py-Planes is executed as one game, but in the back-end are actually two separate
 
 The user and game settings are stored in a JSON files which contents are being read and submitted to specific object in the front-end. The settings are also used for the PyGame logic giving the user's plane specific abilities as damage, health, armor, etc. and setting the game fps.  
 
-## Guideline
+## Guideline :book:
 
-## Tech-Stack
+## Tech-Stack :building_construction:
 
 * Python 3.10 >
-* [PyQt5 - Qt Framework] (https://www.qt.io/product/framework) library ported for Python
-* [PyGame] (https://www.pygame.org/news)
-* [Pixilart] (https://www.pixilart.com/)
-* [Git] (https://git-scm.com/)
-* [GitHub] (https://github.com/) & [GitHub Projects] (https://github.com/Stake-And-Rope/py-planes/projects?query=is%3Aopen)
-* [Obisidan] (https://obsidian.md/)
+* [PyQt5 - Qt Framework](https://www.qt.io/product/framework) library ported for Python
+* [PyGame](https://www.pygame.org/news)
+* [Pixilart](https://www.pixilart.com/)
+* [Git](https://git-scm.com/)
+* [GitHub](https://github.com/) & [GitHub Projects](https://github.com/Stake-And-Rope/py-planes/projects?query=is%3Aopen)
+* [Obisidan](https://obsidian.md/)
 
-## Team-Project
+## Team-Project :woman_factory_worker: :factory_worker: :mechanic:
 
 Py-Planes is a hobby-project created by students and professionals, aiming to create an environment for training and gaining new skills. 
 
-## Contributors
+## Contributors :mechanic:
 
-[rayapetkova] (https://github.com/rayapetkova)
-[kumchovylcho] (https://github.com/orgs/Stake-And-Rope/people/kumchovylcho)
-[karastoyanov] (https://github.com/karastoyanov)
+[rayapetkova](https://github.com/rayapetkova)
+[kumchovylcho](https://github.com/orgs/Stake-And-Rope/people/kumchovylcho)
+[karastoyanov](https://github.com/karastoyanov)
