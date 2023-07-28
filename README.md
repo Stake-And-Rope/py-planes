@@ -28,12 +28,9 @@ Py-Planes is a hobby-project created by students and professionals, aiming to cr
 
 ## Contributors :mechanic:
 
-<<<<<<< HEAD:README.md.md
 [rayapetkova](https://github.com/rayapetkova)
+
 [kumchovylcho](https://github.com/orgs/Stake-And-Rope/people/kumchovylcho)
+
 [karastoyanov](https://github.com/karastoyanov)
-=======
-[rayapetkova] (https://github.com/rayapetkova)
-[kumchovylcho] (https://github.com/orgs/Stake-And-Rope/people/kumchovylcho)
-[karastoyanov] (https://github.com/karastoyanov)
->>>>>>> 7bc400b47eef01a39cc9bb17da90d77607552333:README.md
+
