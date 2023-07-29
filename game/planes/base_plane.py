@@ -2,7 +2,7 @@
 
 import pygame as pg
 
-from game.bullet import Bullet
+from game.bullets.user_bullet import UserBullet
 from game.helpers import get_screen_dimensions
 from settings.settings_handler import get_game_settings
 
@@ -171,7 +171,7 @@ class Plane:
         """
 
         for wep_x, wep_y in self.get_weapons_locations[:self.shoot_bullets_amount]:
-            create_bullet = Bullet(wep_x, wep_y)
+            create_bullet = UserBullet(wep_x, wep_y)
 
             self.bullets.append(create_bullet)
 
