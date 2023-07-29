@@ -117,7 +117,7 @@ class PlanesMenu(QWidget):
 
         back_to_main_menu_button = QPushButton()
         back_to_main_menu_button.setProperty("class", "menu_button")
-        back_to_main_menu_button.setText("Back to Main Menu")
+        back_to_main_menu_button.setText("Main Menu")
         back_to_main_menu_button.setFont(QFont(fonts[0], 15))
         back_to_main_menu_button.setFixedWidth(175)
         back_to_main_menu_button.setFixedHeight(50)

@@ -27,6 +27,7 @@ from pathlib import Path
 sys.path.append(r'.')
 from gui import choose_a_plane_menu
 from gui import settings_menu
+from gui import credits_menu
 sys.path.append(r'..')
 from sounds.sounds import main_menu_music
 song = r'sounds/music/main_menu_music.flac'
@@ -118,7 +119,7 @@ class MainMenu(QWidget):
             if button == "Settings":
                 current_button.clicked.connect(lambda: open_settings_menu())
             if button == "Credits":
-                pass
+                current_button.clicked.connect(lambda: open_credits_menu())
             if button == "Quit Game":
                 current_button.clicked.connect(lambda: app.quit())
                 
@@ -163,4 +164,8 @@ global open_settings_menu
 def open_settings_menu():
     main_window.hide()
     settings_menu.open_settings()
-    
+
+global open_credits_menu
+def open_credits_menu():
+    main_window.hide()
+    credits_menu.open_credits()

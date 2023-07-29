@@ -10,5 +10,8 @@ sounds/__pycache__/
 # Ignore PyCharm dir
 .idea/
 
+# Ignore Obsidian config dir
+.obsidan/
+
 # for testing purposes
 /game/test_mask_overlap.py

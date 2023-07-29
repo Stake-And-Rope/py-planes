@@ -142,7 +142,7 @@ class SettingsMenu(QWidget):
         
         back_button = QPushButton()
         back_button.setProperty("class", "menu_button")
-        back_button.setText("Back to Main Menu")
+        back_button.setText("Main Menu")
         back_button.setFont(QFont(fonts[0], 18))
         back_button.setFixedSize(200, 50)
         back_button.clicked.connect(lambda: back_to_main_menu())
