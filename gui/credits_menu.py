@@ -71,8 +71,6 @@ class CreditsMenu(QWidget):
         title_layout.addWidget(version_area)
         title_layout.setAlignment(Qt.AlignCenter)
 
-        
-        
         """DESCRIPTION LAYOUT"""
         description_layout = QVBoxLayout()
         description_layout.addStretch(10)
