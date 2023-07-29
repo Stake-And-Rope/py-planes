@@ -26,6 +26,7 @@ class Plane:
         self.x_pos = None
         self.y_pos = None
 
+        self.shoot_bullets_amount = 2
         self.shooting_cooldown = 0
         self.bullets = []
 
@@ -36,6 +37,22 @@ class Plane:
     @property
     def can_shoot_bullet(self):
         return self.shooting_cooldown <= 0
+
+    @property
+    def get_weapons_locations(self):
+        """
+        :return: (
+                  (left_outer_weapon, plane_y),
+                  (right_outer_weapon, plane_y),
+                  (left_inner_weapon, plane_y),
+                  (right_inner_weapon, plane_y)
+                 )
+        """
+
+        inner_weapons_pos = ((self.x_pos + 11, self.y_pos), (self.x_pos + 50, self.y_pos))
+        outer_weapons_pos = ((self.x_pos + 6, self.y_pos), (self.x_pos + 56, self.y_pos))
+
+        return outer_weapons_pos + inner_weapons_pos
 
     @property
     def middle_screen_border(self):
@@ -122,6 +139,7 @@ class Plane:
         updates the coordinates of the plane if the correct keys are pressed
         shoots bullets if the correct button is pressed and if there is no cooldown
         """
+
         button_press = pg.key.get_pressed()
 
         for button in self.move_directions:
@@ -146,13 +164,29 @@ class Plane:
             self.shooting_cooldown = 0
 
     def shoot_bullet(self):
-        self.bullets.append(Bullet(*self.get_plane_pos))
+        """
+        1. loops through the sliced tuple with the coordinates of the plane weapons
+        2. creates a bullet for each weapon
+        3. adds shoot cooldown after the bullets are fired
+        """
+
+        for wep_x, wep_y in self.get_weapons_locations[:self.shoot_bullets_amount]:
+            create_bullet = Bullet(wep_x, wep_y)
+
+            self.bullets.append(create_bullet)
+
         self.shooting_cooldown = self.get_shoot_cd
 
     def update_shot_bullets(self, screen):
+        """
+        1. looping through all the bullets on the screen
+        2. updating the shot bullet
+        3. displaying each bullet on screen
+        4. removing the bullets which went out of the screen
+        """
+
         for bullet in self.bullets:
             bullet.move_bullet()
-            screen.blit(bullet.image, bullet.get_first_bullet_pos)
-            screen.blit(bullet.image, bullet.get_second_bullet_pos)
+            screen.blit(bullet.image, bullet.get_bullet_pos)
 
         self.bullets = [bullet for bullet in self.bullets if bullet.bullet_y > 0]
