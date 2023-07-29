@@ -1,20 +1,20 @@
 .planes { 
-    background-image: url(images/menu/planes_background.jpg);
-    background-position: right center;
+    background-image: url(images/menu/planes_background.png);
+    background-position: center;
     background-repeat: no-repeat;
     /* background-color: #56ba77; */
     color: #bfbfbf;
     border-radius:  10px;
     border: 1px solid #bfbfbf;
-    border-bottom: 3px solid #237204;
-    border-right: 3px solid #237204;
+    border-bottom: 3px solid #000000;
+    border-right: 3px solid #000000;
     padding: 2px 2px;
     margin-top: 2px;
     outline: 0px;
 }
 
 .planes:hover {
-    background-color: #7fd49b;
+    background-color: #fd6500;
 }
 
 .background {
