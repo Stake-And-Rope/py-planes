@@ -1,20 +1,22 @@
 #!/usr/bin/python3
 
 import pygame as pg
-import sys
+pg.init()
 
+import sys
 from game.background_loop import BackgroundLoop
-from game.planes.base_plane import Plane
 from settings.settings_handler import get_game_settings
 from game import helpers
 
 
-
-sys.path.append(r'..')
-pg.init()
-
 window_size = helpers.get_screen_dimensions()
 screen = pg.display.set_mode(window_size)
+
+from game.planes.base_plane import Plane
+
+
+sys.path.append(r'..')
+
 
 user_settings = get_game_settings()
 

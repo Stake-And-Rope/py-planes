@@ -8,6 +8,16 @@ def get_plane_speed(fps: int) -> float:
     return plane_speed.get(fps)
 
 
+def get_bullet_speed(fps: int) -> float:
+    bullet_speed = {
+        45: 4.5,
+        60: 3.5,
+        75: 2.5,
+    }
+
+    return bullet_speed.get(fps)
+
+
 def get_background_roll_speed(fps: int) -> float:
     looping_speed = {
         45: 2,
