@@ -30,7 +30,7 @@ from gui import settings_menu
 from gui import credits_menu
 sys.path.append(r'..')
 from sounds.sounds import main_menu_music
-song = r'sounds/music/main_menu_music.flac'
+song = r'sounds/music/main_menu_music.wav'
 
 
 
