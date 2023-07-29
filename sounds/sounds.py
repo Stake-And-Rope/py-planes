@@ -6,10 +6,15 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 import sys, os
 from pathlib import Path
 
+sys.path.append(r'..')
+from settings import settings_handler
+
 # song = r'sounds/music/main_menu_music.flac'
 
 """PLAY THE BACKGROUND MUSIC"""
 def main_menu_music(music, app):
+    us = settings_handler.get_game_settings()
+    
     player = QMediaPlayer()
 
     music = os.path.join(os.getcwd(), music)
@@ -20,8 +25,8 @@ def main_menu_music(music, app):
     bg_playlist.setPlaybackMode(QMediaPlaylist.Loop)
 
     
-    player.setVolume(100)
-    # player.play()
+    player.setVolume(int(us.get("music")))
+    player.play()
     app.exec()
 
 # main_menu_music()
