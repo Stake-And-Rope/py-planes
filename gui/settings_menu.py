@@ -21,6 +21,7 @@ sys.path.append(r".")
 from gui import main_menu
 sys.path.append('..')
 from settings import settings_handler
+from sounds import sounds
 
 
 class SettingsMenu(QWidget):
@@ -140,7 +141,6 @@ class SettingsMenu(QWidget):
         save_settings_button.setFont(QFont(fonts[0], 18))
         save_settings_button.setFixedSize(200, 50)
         save_settings_button.clicked.connect(lambda: save_settings())
-        save_settings_button.clicked.connect(lambda: save_settings_popout())
         
         back_button = QPushButton()
         back_button.setProperty("class", "menu_button")
@@ -168,16 +168,8 @@ class SettingsMenu(QWidget):
         def save_settings():
             settings_handler.overwrite_game_settings(**{"fps":fps_menu.currentText(), "music":str(music_vol_slider.value()), "effects": str(effects_vol_slider.value())})
             settings_handler.overwrite_user_settings(**{"username":user_name_textbox.text()})
-        
-        def save_settings_popout():
-            info_msg_box = QMessageBox()
-            info_msg_box.setIcon(QMessageBox.Warning)
-            info_msg = 'Restart the game to load the new settings'
-            info_msg_box.setText(info_msg)
-            info_msg_box.setFont(QFont(fonts[0], 15))
-            info_msg_box.setWindowTitle("Py-Planes")
-            info_box = info_msg_box.exec()
-
+            sounds.change_volume()
+            
 def open_settings():
     global settings_window
     settings_window = SettingsMenu()

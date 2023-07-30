@@ -11,10 +11,13 @@ from settings import settings_handler
 
 # song = r'sounds/music/main_menu_music.flac'
 
+
 """PLAY THE BACKGROUND MUSIC"""
 def main_menu_music(music, app):
+    global us
     us = settings_handler.get_game_settings()
     
+    global player
     player = QMediaPlayer()
 
     music = os.path.join(os.getcwd(), music)
@@ -24,9 +27,13 @@ def main_menu_music(music, app):
     player.setPlaylist(bg_playlist)
     bg_playlist.setPlaybackMode(QMediaPlaylist.Loop)
 
-    
+
     player.setVolume(int(us.get("music")))
     player.play()
     app.exec()
+    
+def change_volume():
+    us = settings_handler.get_game_settings()
+    player.setVolume(int(us.get("music")))
 
 # main_menu_music()
