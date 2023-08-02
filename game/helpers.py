@@ -62,3 +62,7 @@ def get_screen_dimensions() -> tuple:
 
 def random_enemy_plane_coordinates():
     return random.randint(0, 736 - 1), -64
+
+
+def get_random_image_of_enemy_planes(planes: list):
+    return planes[random.randint(0, len(planes) - 1)]
