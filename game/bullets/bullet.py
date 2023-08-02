@@ -19,6 +19,7 @@ class Bullet(ABC):
     def __init__(self, bullet_x: float, bullet_y: float):
         self.bullet_x = bullet_x
         self.bullet_y = bullet_y
+        self.rect = self.image.get_rect()
 
     @property
     def get_bullet_pos(self):
