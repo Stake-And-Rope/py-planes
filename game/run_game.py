@@ -15,6 +15,7 @@ pg.display.set_caption("py-planes")
 
 from game.planes.user_plane import UserPlane
 from game.planes.enemy_plane import EnemyPlane
+from bar import Bar
 
 sys.path.append(r'..')
 
@@ -37,6 +38,9 @@ pg.time.set_timer(SPAWN_ENEMY, 5000)
 enemy = EnemyPlane("../images/enemy_plane_images/enemy_plane_1.png")
 enemy.set_spawn_point(400, -64)
 
+health_bar = Bar(500, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
+armour_bar = Bar(740, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
+
 running = True
 while running:
     clock.tick(fps)
@@ -49,6 +53,12 @@ while running:
             print("Spawn enemy plane")
 
     background.loop_background(screen)
+
+    health_bar.reduce_health_bar()
+    health_bar.draw_bar(screen)
+
+    armour_bar.reduce_armour_bar()
+    armour_bar.draw_bar(screen)
 
     enemy.plane_functionality()
     enemy.display_plane(screen)
