@@ -13,7 +13,7 @@ class UserPlane(BasePlane):
     UP_DOWN_KEYS = ("w", "s")
     SHOOT_BUTTON = " "
 
-    def __init__(self, model: str):
+    def __init__(self, model):
         super().__init__(model)
 
     @property
