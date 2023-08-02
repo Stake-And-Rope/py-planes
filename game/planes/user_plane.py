@@ -5,9 +5,7 @@ import pygame as pg
 from game.bullets.user_bullet import UserBullet
 from game.helpers import get_screen_dimensions
 from game.planes.base_plane import BasePlane
-from settings.settings_handler import get_game_settings
 
-GAME_FPS = int(get_game_settings().get("fps"))
 SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 
 class UserPlane(BasePlane):
@@ -17,6 +15,10 @@ class UserPlane(BasePlane):
 
     def __init__(self, model: str):
         super().__init__(model)
+
+    @property
+    def get_shoot_cd(self):
+        return 0.5
 
     @property
     def get_weapons_locations(self):
@@ -141,7 +143,7 @@ class UserPlane(BasePlane):
 
         self.shooting_cooldown = self.get_shoot_cd
 
-    def remove_bullet_if_out_of_boundary(self):
+    def remove_out_of_boundary_bullets(self):
         self.bullets = [bullet for bullet in self.bullets if bullet.bullet_y > 0]
 
 
