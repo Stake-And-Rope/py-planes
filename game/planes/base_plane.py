@@ -3,7 +3,7 @@ from abc import (ABC,
                  abstractmethod,
                  )
 
-import pygame as pg
+from pygame import Surface
 
 from game import helpers
 from game.helpers import get_screen_dimensions
@@ -16,8 +16,8 @@ class BasePlane(ABC):
     GAME_FPS = int(get_game_settings().get("fps"))
     plane_speed = helpers.get_plane_speed(GAME_FPS)
 
-    def __init__(self, model: str):
-        self.model = pg.image.load(model).convert_alpha()
+    def __init__(self, model: Surface):
+        self.model = model
         self.rect = self.model.get_rect()
         self.height = self.rect.height
         self.width = self.rect.width
@@ -53,10 +53,6 @@ class BasePlane(ABC):
     @abstractmethod
     def set_spawn_point(self, x_pos: int, y_pos: int):
        pass
-
-    @abstractmethod
-    def check_plane_boundaries(self):
-        pass
 
     @abstractmethod
     def plane_functionality(self):
