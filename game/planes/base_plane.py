@@ -9,20 +9,19 @@ from game import helpers
 from game.helpers import get_screen_dimensions
 from settings.settings_handler import get_game_settings
 
-GAME_FPS = int(get_game_settings().get("fps"))
 SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
-
-plane_speed = helpers.get_plane_speed(GAME_FPS)
 
 
 class BasePlane(ABC):
+    GAME_FPS = int(get_game_settings().get("fps"))
+    plane_speed = helpers.get_plane_speed(GAME_FPS)
 
     def __init__(self, model: str):
         self.model = pg.image.load(model).convert_alpha()
         self.rect = self.model.get_rect()
         self.height = self.rect.height
         self.width = self.rect.width
-        self.fly_speed = plane_speed
+        self.fly_speed = self.plane_speed
         self.x_pos = None
         self.y_pos = None
 
@@ -36,8 +35,9 @@ class BasePlane(ABC):
         pass
 
     @property
+    @abstractmethod
     def get_shoot_cd(self):
-        return 0.5
+        pass
 
     @property
     def can_shoot_bullet(self):
@@ -67,11 +67,11 @@ class BasePlane(ABC):
         pass
 
     @abstractmethod
-    def remove_bullet_if_out_of_boundary(self):
+    def remove_out_of_boundary_bullets(self):
         pass
 
     def lower_shoot_cooldown(self):
-        self.shooting_cooldown -= 1 / GAME_FPS
+        self.shooting_cooldown -= 1 / self.GAME_FPS
 
         if self.can_shoot_bullet:
             self.shooting_cooldown = 0
@@ -88,7 +88,7 @@ class BasePlane(ABC):
             bullet.move_bullet()
             screen.blit(bullet.image, bullet.get_bullet_pos)
 
-        self.remove_bullet_if_out_of_boundary()
+        self.remove_out_of_boundary_bullets()
 
     def display_plane(self, window):
         window.blit(self.model, self.get_plane_pos)
