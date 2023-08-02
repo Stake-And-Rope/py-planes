@@ -1,8 +1,21 @@
+import random
+
+
 def get_plane_speed(fps: int) -> float:
     plane_speed = {
         45: 4.5,
         60: 3.5,
         75: 2.5,
+    }
+
+    return plane_speed.get(fps)
+
+
+def get_enemy_plane_speed(fps: int) -> float:
+    plane_speed = {
+        45: 0.667,
+        60: 0.5,
+        75: 0.4,
     }
 
     return plane_speed.get(fps)
@@ -45,3 +58,7 @@ def calculate_center(main_obj_width, child_obj_width):
 
 def get_screen_dimensions() -> tuple:
     return 900, 800
+
+
+def random_enemy_plane_coordinates():
+    return random.randint(0, 736 - 1), -64
