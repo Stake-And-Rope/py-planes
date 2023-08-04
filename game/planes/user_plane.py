@@ -46,10 +46,10 @@ class UserPlane(BasePlane):
         map to get the buttons and the direction
         """
         return {
-            pg.key.key_code(self.LEFT_RIGHT_KEYS[0]): -self.fly_speed,
-            pg.key.key_code(self.LEFT_RIGHT_KEYS[1]): self.fly_speed,
-            pg.key.key_code(self.UP_DOWN_KEYS[0]): -self.fly_speed,
-            pg.key.key_code(self.UP_DOWN_KEYS[1]): self.fly_speed,
+            pg.key.key_code(self.LEFT_RIGHT_KEYS[0]): -self.plane_speed,
+            pg.key.key_code(self.LEFT_RIGHT_KEYS[1]): self.plane_speed,
+            pg.key.key_code(self.UP_DOWN_KEYS[0]): -self.plane_speed,
+            pg.key.key_code(self.UP_DOWN_KEYS[1]): self.plane_speed,
         }
 
     def set_spawn_point(self,
@@ -106,7 +106,7 @@ class UserPlane(BasePlane):
         elif self.y_pos > bottom_border:
             self.y_pos = bottom_border
 
-    def plane_functionality(self):
+    def functionality(self):
         """
         updates the coordinates of the plane if the correct keys are pressed
         shoots bullets if the correct button is pressed and if there is no cooldown
