@@ -16,6 +16,7 @@ pg.display.set_caption("py-planes")
 from game.planes.user_plane import UserPlane
 from game.planes.enemy_plane import EnemyPlane
 from game.planes.control_enemies import EnemyController
+from game.planes.enemy_tower import Tower
 from bar import Bar
 
 sys.path.append(r'..')
@@ -24,9 +25,9 @@ user_settings = get_game_settings()
 
 fps = int(user_settings.get("fps"))
 
-green_plane = UserPlane(pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha())
-green_plane.set_spawn_point(
-    helpers.calculate_center(window_size[0], green_plane.model.get_width()),
+user_plane = UserPlane(pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha())
+user_plane.set_spawn_point(
+    helpers.calculate_center(window_size[0], user_plane.model.get_width()),
     650
     )
 
@@ -34,11 +35,15 @@ background = BackgroundLoop(fps)
 clock = pg.time.Clock()
 
 SPAWN_ENEMY_PLANE = pg.USEREVENT + 1
-pg.time.set_timer(SPAWN_ENEMY_PLANE, 5000)
+pg.time.set_timer(SPAWN_ENEMY_PLANE, 5_000)
+
+SPAWN_TOWER = pg.USEREVENT + 2
+pg.time.set_timer(SPAWN_TOWER, 8_000)
 
 enemy_planes_surface_objects = [
     pg.image.load(f"../images/enemy_plane_images/enemy_plane_{i}.png").convert_alpha() for i in range(1, 4)
 ]
+tower_img = pg.image.load("../images/buildings/tower_1.png").convert_alpha()
 
 enemies = EnemyController()
 
@@ -57,6 +62,9 @@ while running:
             random_image = helpers.get_random_image_of_enemy_planes(enemy_planes_surface_objects)
             enemies.add_enemy(EnemyPlane(random_image))
 
+        elif event.type == SPAWN_TOWER:
+            enemies.add_enemy(Tower(tower_img))
+
     background.loop_background(screen)
 
     health_bar.reduce_health_bar()
@@ -65,12 +73,12 @@ while running:
     armour_bar.reduce_armour_bar()
     armour_bar.draw_bar(screen)
 
-    enemies.update_enemies(screen)
+    enemies.update_planes(screen)
+    enemies.update_towers(screen, user_plane)
 
-    green_plane.plane_functionality()
-    green_plane.display_plane(screen)
-
-    green_plane.update_shot_bullets(screen)
+    user_plane.functionality()
+    user_plane.display_plane(screen)
+    user_plane.update_shot_bullets(screen)
 
     pg.display.flip()
 
