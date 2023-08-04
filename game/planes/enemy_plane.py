@@ -88,7 +88,7 @@ class EnemyPlane(BasePlane):
         elif self.x_pos >= right_border:
             self.x_pos = right_border
 
-    def plane_functionality(self):
+    def functionality(self):
         self.y_pos += self.plane_speed
         self.x_pos += self.x_direction
 
