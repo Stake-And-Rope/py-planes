@@ -21,7 +21,6 @@ class BasePlane(ABC):
         self.rect = self.model.get_rect()
         self.height = self.rect.height
         self.width = self.rect.width
-        self.fly_speed = self.plane_speed
         self.x_pos = None
         self.y_pos = None
 
@@ -53,14 +52,6 @@ class BasePlane(ABC):
     @abstractmethod
     def set_spawn_point(self, x_pos: int, y_pos: int):
        pass
-
-    @abstractmethod
-    def plane_functionality(self):
-        pass
-
-    @abstractmethod
-    def shoot_bullet(self):
-        pass
 
     @abstractmethod
     def remove_out_of_boundary_bullets(self):
