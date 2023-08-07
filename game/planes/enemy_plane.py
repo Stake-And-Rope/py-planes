@@ -42,7 +42,7 @@ class EnemyPlane(BasePlane):
 
     @property
     def is_below_screen(self):
-        return self.y_pos > SCREEN_WIDTH
+        return self.y_pos > SCREEN_HEIGHT
 
     @property
     def can_change_direction(self):
@@ -79,18 +79,26 @@ class EnemyPlane(BasePlane):
         self.x_pos = x_pos
         self.y_pos = y_pos
 
+        self.rect.x = x_pos
+        self.rect.y = y_pos
+
     def check_plane_boundaries(self):
         right_border = SCREEN_WIDTH - self.rect.width
 
         if self.x_pos < 0:
             self.x_pos = 0
+            self.rect.x = 0
 
         elif self.x_pos >= right_border:
             self.x_pos = right_border
+            self.rect.x = right_border
 
     def functionality(self):
         self.y_pos += self.plane_speed
         self.x_pos += self.x_direction
+
+        self.rect.y += self.plane_speed
+        self.rect.x += self.x_direction
 
         if self.can_shoot_bullet:
             self.shoot_bullet()
@@ -111,3 +119,4 @@ class EnemyPlane(BasePlane):
 
     def remove_out_of_boundary_bullets(self):
         self.bullets = [bullet for bullet in self.bullets if bullet.rect.height + bullet.bullet_y < SCREEN_HEIGHT]
+

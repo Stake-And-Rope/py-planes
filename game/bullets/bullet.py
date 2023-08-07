@@ -20,10 +20,12 @@ class Bullet(ABC):
         self.bullet_x = bullet_x
         self.bullet_y = bullet_y
         self.rect = self.image.get_rect()
+        self.rect.x = bullet_x
+        self.rect.y = bullet_y
 
     @property
     def get_bullet_pos(self):
-        return self.bullet_x, self.bullet_y
+        return self.rect.x, self.rect.y
 
     @abstractmethod
     def move_bullet(self):

@@ -48,6 +48,9 @@ class Tower(BasePlane):
         self.x_pos = x_pos
         self.y_pos = y_pos
 
+        self.rect.x = x_pos
+        self.rect.y = y_pos
+
     def get_fire_bullet_exit_point(self, user_plane):
         tower_x, tower_y = self.get_weapons_locations
 
@@ -66,6 +69,7 @@ class Tower(BasePlane):
 
     def functionality(self,screen, user_plane):
         self.y_pos += self.plane_speed
+        self.rect.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet(user_plane)

@@ -3,6 +3,7 @@ images/__pycache__/
 gui/__pycache__/
 game/__pycache__/
 sounds/__pycache__/
+__pycache__/
 
 # Ignore VSCode config dir
 .vscode/

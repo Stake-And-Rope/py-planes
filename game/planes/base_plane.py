@@ -3,6 +3,7 @@ from abc import (ABC,
                  abstractmethod,
                  )
 
+import pygame
 from pygame import Surface
 
 from game import helpers
@@ -74,6 +75,7 @@ class BasePlane(ABC):
         for bullet in self.bullets:
             bullet.move_bullet()
             screen.blit(bullet.image, bullet.get_bullet_pos)
+            pygame.draw.rect(screen, (255, 0, 0), bullet.rect, 3)
 
         self.remove_out_of_boundary_bullets()
 
