@@ -79,8 +79,8 @@ class UserPlane(BasePlane):
         self.x_pos = x_pos
         self.y_pos = y_pos
 
-        self.rect.x = x_pos
-        self.rect.y = y_pos
+        self.float_rect.x = x_pos
+        self.float_rect.y = y_pos
 
     def check_plane_boundaries(self):
         """
@@ -99,19 +99,19 @@ class UserPlane(BasePlane):
 
         if self.x_pos < 0:
             self.x_pos = 0
-            self.rect.x = 0
+            self.float_rect.x = 0
 
         elif self.x_pos > right_border:
             self.x_pos = right_border
-            self.rect.x = right_border
+            self.float_rect.x = right_border
 
         if self.y_pos < self.middle_screen_border:
             self.y_pos = self.middle_screen_border
-            self.rect.y = self.middle_screen_border
+            self.float_rect.y = self.middle_screen_border
 
         elif self.y_pos > bottom_border:
             self.y_pos = bottom_border
-            self.rect.y = bottom_border
+            self.float_rect.y = bottom_border
 
     def functionality(self):
         """
@@ -124,11 +124,11 @@ class UserPlane(BasePlane):
         for button in self.move_directions:
             if button_press[button] and pg.key.name(button) in self.LEFT_RIGHT_KEYS:
                 self.x_pos += self.move_directions[button]
-                self.rect.x += self.move_directions[button]
+                self.float_rect.x += self.move_directions[button]
 
             if button_press[button] and pg.key.name(button) in self.UP_DOWN_KEYS:
                 self.y_pos += self.move_directions[button]
-                self.rect.y += self.move_directions[button]
+                self.float_rect.y += self.move_directions[button]
 
             self.check_plane_boundaries()
 

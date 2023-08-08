@@ -15,19 +15,19 @@ class TowerBullet(Bullet):
         super().__init__(bullet_x, bullet_y)
         self.target_x = target.x_pos
         self.target_y = target.y_pos
-        self.target_rect = target.rect
+        self.target_rect = target.float_rect
         self.direction_radians = self.calculate_direction()
 
     def calculate_direction(self):
-        print(self.rect.y)
+        print(self.float_rect.y)
         print(self.bullet_y)
-        return math.atan2(self.target_y + (self.target_rect.height // 2) - self.rect.y,
-                          self.target_x + (self.target_rect.width // 2) - self.rect.x
+        return math.atan2(self.target_y + (self.target_rect.height // 2) - self.bullet_y,
+                          self.target_x + (self.target_rect.width // 2) - self.bullet_x
                           )
 
     def move_bullet(self):
         self.bullet_x += self.bullet_speed * math.cos(self.direction_radians)
         self.bullet_y += self.bullet_speed * math.sin(self.direction_radians)
 
-        self.rect.x += self.bullet_speed * math.cos(self.direction_radians)
-        self.rect.y += self.bullet_speed * math.sin(self.direction_radians)
+        self.float_rect.x += self.bullet_speed * math.cos(self.direction_radians)
+        self.float_rect.y += self.bullet_speed * math.sin(self.direction_radians)

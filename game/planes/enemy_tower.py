@@ -48,14 +48,14 @@ class Tower(BasePlane):
         self.x_pos = x_pos
         self.y_pos = y_pos
 
-        self.rect.x = x_pos
-        self.rect.y = y_pos
+        self.float_rect.x = x_pos
+        self.float_rect.y = y_pos
 
     def get_fire_bullet_exit_point(self, user_plane):
         tower_x, tower_y = self.get_weapons_locations
 
-        direction = (user_plane.x_pos + (user_plane.rect.width // 2) - tower_x,
-                     user_plane.y_pos + (user_plane.rect.height // 2) - tower_y)
+        direction = (user_plane.x_pos + (user_plane.float_rect.width // 2) - tower_x,
+                     user_plane.y_pos + (user_plane.float_rect.height // 2) - tower_y)
 
         distance = math.sqrt(direction[0] ** 2 + direction[1] ** 2)
 
@@ -69,7 +69,7 @@ class Tower(BasePlane):
 
     def functionality(self,screen, user_plane):
         self.y_pos += self.plane_speed
-        self.rect.y += self.plane_speed
+        self.float_rect.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet(user_plane)
@@ -103,10 +103,10 @@ class Tower(BasePlane):
             if bullet.bullet_x > SCREEN_WIDTH:
                 continue
 
-            if bullet.bullet_x + bullet.rect.width < 0:
+            if bullet.bullet_x + bullet.float_rect.width < 0:
                 continue
 
-            if bullet.bullet_y + bullet.rect.height < 0:
+            if bullet.bullet_y + bullet.float_rect.height < 0:
                 continue
 
             if bullet.bullet_y > SCREEN_HEIGHT:

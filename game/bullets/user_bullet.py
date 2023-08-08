@@ -8,4 +8,4 @@ class UserBullet(Bullet):
 
     def move_bullet(self):
         self.bullet_y -= self.bullet_speed
-        self.rect.y -= self.bullet_speed
+        self.float_rect.y -= self.bullet_speed

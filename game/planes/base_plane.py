@@ -11,6 +11,7 @@ from game.helpers import get_screen_dimensions
 from settings.settings_handler import get_game_settings
 
 SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
+from game.float_rect import FloatRect
 
 
 class BasePlane(ABC):
@@ -19,9 +20,10 @@ class BasePlane(ABC):
 
     def __init__(self, model: Surface):
         self.model = model
-        self.rect = self.model.get_rect()
-        self.height = self.rect.height
-        self.width = self.rect.width
+        self.regular_rect = self.model.get_rect()
+        self.height = self.regular_rect.height
+        self.width = self.regular_rect.width
+        self.float_rect = FloatRect(None, None, self.width, self.height)
         self.x_pos = None
         self.y_pos = None
 
@@ -75,7 +77,6 @@ class BasePlane(ABC):
         for bullet in self.bullets:
             bullet.move_bullet()
             screen.blit(bullet.image, bullet.get_bullet_pos)
-            pygame.draw.rect(screen, (255, 0, 0), bullet.rect, 3)
 
         self.remove_out_of_boundary_bullets()
 
