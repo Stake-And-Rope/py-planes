@@ -69,11 +69,11 @@ while running:
 
     keys_pressed = pygame.key.get_pressed()
 
-    if keys_pressed[pygame.K_1] and health_bar.current_health:
+    if keys_pressed[pygame.K_1] and health_bar.current_value:
         health_bar.reduce_bar()
     health_bar.draw_bar(screen)
 
-    if keys_pressed[pygame.K_2] and armour_bar.current_health:
+    if keys_pressed[pygame.K_2] and armour_bar.current_value:
         armour_bar.reduce_bar()
     armour_bar.draw_bar(screen)
 
