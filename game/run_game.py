@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import pygame
 import pygame as pg
 
 pg.init()
@@ -67,10 +67,14 @@ while running:
 
     background.loop_background(screen)
 
-    health_bar.reduce_health_bar()
+    keys_pressed = pygame.key.get_pressed()
+
+    if keys_pressed[pygame.K_1] and health_bar.current_health:
+        health_bar.reduce_bar()
     health_bar.draw_bar(screen)
 
-    armour_bar.reduce_armour_bar()
+    if keys_pressed[pygame.K_2] and armour_bar.current_health:
+        armour_bar.reduce_bar()
     armour_bar.draw_bar(screen)
 
     enemies.update_planes(screen)

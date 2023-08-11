@@ -18,14 +18,5 @@ class Bar:
         pygame.draw.rect(window, self.top_colour, (self.x, self.y, self.width, self.height), border_radius=3)
         pygame.draw.rect(window, self.bottom_colour, (self.x, self.y, current_health_to_max_health * self.width, self.height), border_radius=3)
 
-    def reduce_health_bar(self):
-        keys_pressed = pygame.key.get_pressed()
-
-        if keys_pressed[pygame.K_1] and self.current_health:
-            self.current_health -= 1
-
-    def reduce_armour_bar(self):
-        keys_pressed = pygame.key.get_pressed()
-
-        if keys_pressed[pygame.K_2] and self.current_health:
-            self.current_health -= 1
+    def reduce_bar(self):
+        self.current_health -= 1
