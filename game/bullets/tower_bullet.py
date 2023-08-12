@@ -19,8 +19,6 @@ class TowerBullet(Bullet):
         self.direction_radians = self.calculate_direction()
 
     def calculate_direction(self):
-        print(self.float_rect.y)
-        print(self.bullet_y)
         return math.atan2(self.target_y + (self.target_rect.height // 2) - self.bullet_y,
                           self.target_x + (self.target_rect.width // 2) - self.bullet_x
                           )

@@ -2,6 +2,7 @@ from abc import (ABC,
                  abstractmethod
                  )
 
+import pygame
 from pygame import image
 
 from game.helpers import get_bullet_speed
@@ -25,6 +26,7 @@ class Bullet(ABC):
         self.image_width = self.regular_rect[2]
         self.image_height = self.regular_rect[3]
         self.float_rect = FloatRect(bullet_x, bullet_y, self.image_width, self.image_height)
+        self.bullet_mask = pygame.mask.from_surface(self.image)
 
     @property
     def get_bullet_pos(self):

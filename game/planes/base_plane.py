@@ -20,6 +20,7 @@ class BasePlane(ABC):
 
     def __init__(self, model: Surface):
         self.model = model
+        self.plane_mask = pygame.mask.from_surface(model)
         self.regular_rect = self.model.get_rect()
         self.height = self.regular_rect.height
         self.width = self.regular_rect.width

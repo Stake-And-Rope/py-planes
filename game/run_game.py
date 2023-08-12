@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-import pygame
 import pygame as pg
+
+import game.float_rect
 
 pg.init()
 
@@ -17,6 +18,7 @@ from game.planes.user_plane import UserPlane
 from game.planes.enemy_plane import EnemyPlane
 from game.planes.control_enemies import EnemyController
 from game.planes.enemy_tower import Tower
+from game.float_rect import float_rects_collide
 from bar import Bar
 
 sys.path.append(r'..')
@@ -25,7 +27,8 @@ user_settings = get_game_settings()
 
 fps = int(user_settings.get("fps"))
 
-user_plane = UserPlane(pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha())
+user_plane_image = pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha()
+user_plane = UserPlane(user_plane_image)
 user_plane.set_spawn_point(
     helpers.calculate_center(window_size[0], user_plane.model.get_width()),
     650
@@ -50,6 +53,20 @@ enemies = EnemyController()
 health_bar = Bar(500, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
 armour_bar = Bar(740, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
 
+
+def collision():
+    for enemy in enemies.enemy_planes:
+        for bullet in enemy.bullets:
+            if float_rects_collide(bullet.float_rect, user_plane.float_rect):
+                bullet_mask = bullet.bullet_mask
+                user_plane_mask = user_plane.plane_mask
+
+                if user_plane_mask.overlap(bullet_mask,
+                                           (int(bullet.float_rect.x) - int(user_plane.float_rect.x), int(bullet.float_rect.y) - int(user_plane.float_rect.y))):
+                    print(2)
+                    return True
+
+
 running = True
 while running:
     clock.tick(fps)
@@ -67,14 +84,14 @@ while running:
 
     background.loop_background(screen)
 
-    keys_pressed = pygame.key.get_pressed()
+    keys_pressed = pg.key.get_pressed()
 
-    if keys_pressed[pygame.K_1]:
-        health_bar.reduce_bar(1)
-    health_bar.draw_bar(screen)
+    # if keys_pressed[pg.K_1]:
+    #     health_bar.reduce_bar(1)
 
-    if keys_pressed[pygame.K_2]:
-        armour_bar.reduce_bar(1)
+    #
+    # if keys_pressed[pg.K_2]:
+    #     armour_bar.reduce_bar(1)
     armour_bar.draw_bar(screen)
 
     enemies.update_planes(screen)
@@ -83,6 +100,13 @@ while running:
     user_plane.functionality()
     user_plane.display_plane(screen)
     user_plane.update_shot_bullets(screen)
+
+    health_bar.draw_bar(screen)
+
+    if collision():
+        health_bar.reduce_bar(1)
+
+    health_bar.draw_bar(screen)
 
     pg.display.flip()
 
