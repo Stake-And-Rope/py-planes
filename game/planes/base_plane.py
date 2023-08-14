@@ -87,7 +87,7 @@ class BasePlane(ABC):
                   width=self.bar_width,
                   height=self.bar_height,
                   max_value=self.armor,
-                  top_colour=(0, 153, 0),
+                  top_colour=(21, 43, 79),
                   bottom_colour=(128, 128, 128),
                   )
         setattr(self, "armor_bar", bar)
