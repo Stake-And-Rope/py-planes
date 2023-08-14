@@ -12,8 +12,8 @@ SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 class EnemyPlane(BasePlane):
     plane_speed = get_enemy_plane_speed(BasePlane.GAME_FPS)
 
-    def __init__(self, model):
-        super().__init__(model)
+    def __init__(self, model, health, armor, damage):
+        super().__init__(model, health, armor, damage)
         self.x_direction = 0
         self.distance_until_next_direction = 0
         self.change_direction_every_traveled_pixels = 300
@@ -88,10 +88,14 @@ class EnemyPlane(BasePlane):
         if self.x_pos < 0:
             self.x_pos = 0
             self.float_rect.x = 0
+            self.health_bar.x = self.gap_on_both_ends_of_bar
+            self.armor_bar.x = self.gap_on_both_ends_of_bar
 
         elif self.x_pos >= right_border:
             self.x_pos = right_border
             self.float_rect.x = right_border
+            self.health_bar.x = right_border + self.gap_on_both_ends_of_bar
+            self.armor_bar.x = right_border + self.gap_on_both_ends_of_bar
 
     def functionality(self):
         self.y_pos += self.plane_speed
@@ -99,6 +103,12 @@ class EnemyPlane(BasePlane):
 
         self.float_rect.y += self.plane_speed
         self.float_rect.x += self.x_direction
+
+        self.health_bar.x += self.x_direction
+        self.health_bar.y += self.plane_speed
+
+        self.armor_bar.x += self.x_direction
+        self.armor_bar.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet()
