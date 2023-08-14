@@ -3,7 +3,7 @@ from abc import (ABC,
                  abstractmethod,
                  )
 
-import pygame
+import pygame as pg
 from pygame import Surface
 
 from game import helpers
@@ -12,21 +12,29 @@ from settings.settings_handler import get_game_settings
 
 SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 from game.float_rect import FloatRect
+from game.bar import Bar
 
 
 class BasePlane(ABC):
     GAME_FPS = int(get_game_settings().get("fps"))
     plane_speed = helpers.get_plane_speed(GAME_FPS)
 
-    def __init__(self, model: Surface):
+    def __init__(self, model: Surface, health: int, armor: int, damage: int):
         self.model = model
-        self.plane_mask = pygame.mask.from_surface(model)
+        self.plane_mask = pg.mask.from_surface(model)
         self.regular_rect = self.model.get_rect()
         self.height = self.regular_rect.height
         self.width = self.regular_rect.width
         self.float_rect = FloatRect(None, None, self.width, self.height)
         self.x_pos = None
         self.y_pos = None
+
+        self.health = health
+        self.armor = armor
+        self.damage = damage
+
+        self.bar_width = self.width // 1.2
+        self.bar_height = 10
 
         self.shoot_bullets_amount = 2
         self.shooting_cooldown = 0
@@ -60,6 +68,29 @@ class BasePlane(ABC):
     @abstractmethod
     def remove_out_of_boundary_bullets(self):
         pass
+
+    def create_health_bar(self):
+        bar = Bar(x=helpers.calculate_center(self.width, self.bar_width) + self.x_pos,
+                  y=self.y_pos - self.bar_height,
+                  width=self.bar_width,
+                  height=self.bar_height,
+                  max_value=self.health,
+                  top_colour=(0, 153, 0),
+                  bottom_colour=(128, 128, 128),
+                  )
+        setattr(self, "health_bar", bar)
+        setattr(self, "gap_on_both_ends_of_bar", bar.x - self.x_pos)
+
+    def create_armor_bar(self):
+        bar = Bar(x=helpers.calculate_center(self.width, self.bar_width) + self.x_pos,
+                  y=self.y_pos - self.bar_height,
+                  width=self.bar_width,
+                  height=self.bar_height,
+                  max_value=self.armor,
+                  top_colour=(0, 153, 0),
+                  bottom_colour=(128, 128, 128),
+                  )
+        setattr(self, "armor_bar", bar)
 
     def lower_shoot_cooldown(self):
         self.shooting_cooldown -= 1 / self.GAME_FPS
