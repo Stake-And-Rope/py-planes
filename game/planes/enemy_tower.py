@@ -14,8 +14,8 @@ SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 class Tower(BasePlane):
     plane_speed = get_enemy_plane_speed(BasePlane.GAME_FPS)
 
-    def __init__(self, tower_img):
-        super().__init__(tower_img)
+    def __init__(self, tower_img, health, armor, damage):
+        super().__init__(tower_img, health, armor, damage)
         self.shoot_bullets_amount = 1
         self.weapon_width = 8
         self.weapon_length = 40
@@ -70,6 +70,9 @@ class Tower(BasePlane):
     def functionality(self,screen, user_plane):
         self.y_pos += self.plane_speed
         self.float_rect.y += self.plane_speed
+
+        self.health_bar.y += self.plane_speed
+        self.armor_bar.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet(user_plane)
