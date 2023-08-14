@@ -88,14 +88,14 @@ class EnemyPlane(BasePlane):
         if self.x_pos < 0:
             self.x_pos = 0
             self.float_rect.x = 0
-            self.health_bar.x = self.gap_on_both_ends_of_bar
-            self.armor_bar.x = self.gap_on_both_ends_of_bar
+            self.enemy_health_bar.x = self.enemy_gap_on_both_ends_of_bar
+            self.enemy_armor_bar.x = self.enemy_gap_on_both_ends_of_bar
 
         elif self.x_pos >= right_border:
             self.x_pos = right_border
             self.float_rect.x = right_border
-            self.health_bar.x = right_border + self.gap_on_both_ends_of_bar
-            self.armor_bar.x = right_border + self.gap_on_both_ends_of_bar
+            self.enemy_health_bar.x = right_border + self.enemy_gap_on_both_ends_of_bar
+            self.enemy_armor_bar.x = right_border + self.enemy_gap_on_both_ends_of_bar
 
     def functionality(self):
         self.y_pos += self.plane_speed
@@ -104,11 +104,11 @@ class EnemyPlane(BasePlane):
         self.float_rect.y += self.plane_speed
         self.float_rect.x += self.x_direction
 
-        self.health_bar.x += self.x_direction
-        self.health_bar.y += self.plane_speed
+        self.enemy_health_bar.x += self.x_direction
+        self.enemy_health_bar.y += self.plane_speed
 
-        self.armor_bar.x += self.x_direction
-        self.armor_bar.y += self.plane_speed
+        self.enemy_armor_bar.x += self.x_direction
+        self.enemy_armor_bar.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet()

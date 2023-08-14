@@ -33,6 +33,26 @@ user_plane.set_spawn_point(
     helpers.calculate_center(window_size[0], user_plane.model.get_width()),
     650
     )
+user_plane.create_user_bar(
+    bar_type="health_bar", # creates instance attr with that name
+    x=500,
+    y=760,
+    width=145,
+    height=25,
+    max_value=user_plane.health,
+    top_color=(21, 43, 79),
+    bottom_color=(110, 137, 181)
+    )
+user_plane.create_user_bar(
+    bar_type="armor_bar", # creates instance attr with that name
+    x=740,
+    y=760,
+    width=145,
+    height=25,
+    max_value=user_plane.armor,
+    top_color=(21, 43, 79),
+    bottom_color=(110, 137, 181)
+    )
 
 background = BackgroundLoop(fps)
 clock = pg.time.Clock()
@@ -49,10 +69,6 @@ enemy_planes_surface_objects = [
 tower_img = pg.image.load("../images/buildings/tower_1.png").convert_alpha()
 
 enemies = EnemyController()
-
-health_bar = Bar(500, 760, 145, 25, 100, (21, 43, 79), (110, 137, 181))  # last two tuples are rgb colour codes
-armour_bar = Bar(740, 760, 145, 25, 100, (21, 43, 79), (110, 137, 181))  # last two tuples are rgb colour codes
-
 
 def collision():
     for enemy in enemies.enemy_planes:
@@ -102,10 +118,10 @@ while running:
     user_plane.update_shot_bullets(screen)
 
     if collision():
-        health_bar.reduce_bar(1)
+        user_plane.health_bar.reduce_bar(1)
 
-    armour_bar.draw_bar(screen)
-    health_bar.draw_bar(screen)
+    user_plane.armor_bar.draw_bar(screen)
+    user_plane.health_bar.draw_bar(screen)
 
     pg.display.flip()
 

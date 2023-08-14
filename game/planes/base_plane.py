@@ -33,8 +33,8 @@ class BasePlane(ABC):
         self.armor = armor
         self.damage = damage
 
-        self.bar_width = self.width // 1.2
-        self.bar_height = 10
+        self.enemy_bar_width = self.width // 1.2
+        self.enemy_bar_height = 10
 
         self.shoot_bullets_amount = 2
         self.shooting_cooldown = 0
@@ -69,28 +69,47 @@ class BasePlane(ABC):
     def remove_out_of_boundary_bullets(self):
         pass
 
-    def create_health_bar(self):
-        bar = Bar(x=helpers.calculate_center(self.width, self.bar_width) + self.x_pos,
-                  y=self.y_pos - self.bar_height,
-                  width=self.bar_width,
-                  height=self.bar_height,
+    def auto_create_enemy_health_bar(self):
+        bar = Bar(x=helpers.calculate_center(self.width, self.enemy_bar_width) + self.x_pos,
+                  y=self.y_pos - self.enemy_bar_height,
+                  width=self.enemy_bar_width,
+                  height=self.enemy_bar_height,
                   max_value=self.health,
                   top_colour=(0, 153, 0),
                   bottom_colour=(128, 128, 128),
                   )
-        setattr(self, "health_bar", bar)
-        setattr(self, "gap_on_both_ends_of_bar", bar.x - self.x_pos)
+        setattr(self, "enemy_health_bar", bar)
+        setattr(self, "enemy_gap_on_both_ends_of_bar", bar.x - self.x_pos)
 
-    def create_armor_bar(self):
-        bar = Bar(x=helpers.calculate_center(self.width, self.bar_width) + self.x_pos,
-                  y=self.y_pos - self.bar_height,
-                  width=self.bar_width,
-                  height=self.bar_height,
+    def auto_create_enemy_armor_bar(self):
+        bar = Bar(x=helpers.calculate_center(self.width, self.enemy_bar_width) + self.x_pos,
+                  y=self.y_pos - self.enemy_bar_height,
+                  width=self.enemy_bar_width,
+                  height=self.enemy_bar_height,
                   max_value=self.armor,
                   top_colour=(21, 43, 79),
                   bottom_colour=(128, 128, 128),
                   )
-        setattr(self, "armor_bar", bar)
+        setattr(self, "enemy_armor_bar", bar)
+
+    def create_user_bar(self,
+                        bar_type: str,
+                        x: float,
+                        y: float,
+                        width: int,
+                        height: int,
+                        max_value: int,
+                        top_color: tuple,
+                        bottom_color: tuple):
+        bar = Bar(x=x,
+                  y=y,
+                  width=width,
+                  height=height,
+                  max_value=max_value,
+                  top_colour=top_color,
+                  bottom_colour=bottom_color,
+                  )
+        setattr(self, bar_type, bar)
 
     def lower_shoot_cooldown(self):
         self.shooting_cooldown -= 1 / self.GAME_FPS

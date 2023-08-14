@@ -71,8 +71,8 @@ class Tower(BasePlane):
         self.y_pos += self.plane_speed
         self.float_rect.y += self.plane_speed
 
-        self.health_bar.y += self.plane_speed
-        self.armor_bar.y += self.plane_speed
+        self.enemy_health_bar.y += self.plane_speed
+        self.enemy_armor_bar.y += self.plane_speed
 
         if self.can_shoot_bullet:
             self.shoot_bullet(user_plane)
