@@ -27,8 +27,8 @@ user_settings = get_game_settings()
 
 fps = int(user_settings.get("fps"))
 
-user_plane_image = pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha()
-user_plane = UserPlane(user_plane_image)
+user_plane_image = pg.image.load('../images/user_plane_images/user_plane_1.png').convert_alpha() # TODO: image must come from json
+user_plane = UserPlane(user_plane_image, health=100, armor=100, damage=20) # TODO: hardcoded values must come from json
 user_plane.set_spawn_point(
     helpers.calculate_center(window_size[0], user_plane.model.get_width()),
     650
@@ -50,8 +50,8 @@ tower_img = pg.image.load("../images/buildings/tower_1.png").convert_alpha()
 
 enemies = EnemyController()
 
-health_bar = Bar(500, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
-armour_bar = Bar(740, 760, 145, 25, 100, (110, 137, 181), (21, 43, 79))  # last two tuples are rgb colour codes
+health_bar = Bar(500, 760, 145, 25, 100, (21, 43, 79), (110, 137, 181))  # last two tuples are rgb colour codes
+armour_bar = Bar(740, 760, 145, 25, 100, (21, 43, 79), (110, 137, 181))  # last two tuples are rgb colour codes
 
 
 def collision():
@@ -77,10 +77,10 @@ while running:
 
         elif event.type == SPAWN_ENEMY_PLANE:
             random_image = helpers.get_random_image_of_enemy_planes(enemy_planes_surface_objects)
-            enemies.add_enemy(EnemyPlane(random_image))
+            enemies.add_enemy(EnemyPlane(random_image, 100, 100, 20))  # TODO: hardcoded values must come from json
 
         elif event.type == SPAWN_TOWER:
-            enemies.add_enemy(Tower(tower_img))
+            enemies.add_enemy(Tower(tower_img, 100, 100, 20)) # TODO: hardcoded values must come from json
 
     background.loop_background(screen)
 
@@ -92,7 +92,7 @@ while running:
     #
     # if keys_pressed[pg.K_2]:
     #     armour_bar.reduce_bar(1)
-    armour_bar.draw_bar(screen)
+
 
     enemies.update_planes(screen)
     enemies.update_towers(screen, user_plane)
@@ -101,11 +101,10 @@ while running:
     user_plane.display_plane(screen)
     user_plane.update_shot_bullets(screen)
 
-    health_bar.draw_bar(screen)
-
     if collision():
         health_bar.reduce_bar(1)
 
+    armour_bar.draw_bar(screen)
     health_bar.draw_bar(screen)
 
     pg.display.flip()
