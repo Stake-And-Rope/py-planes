@@ -16,8 +16,9 @@ class Bar:
     def draw_bar(self, window, hide_bar_when_empty=False):
         if self.current_value <= 0 and hide_bar_when_empty:
             return
-        pygame.draw.rect(window, self.top_colour, (self.x, self.y, self.width, self.height), border_radius=3)
-        pygame.draw.rect(window, self.bottom_colour, (self.x, self.y, self.current_width, self.height), border_radius=3)
+
+        pygame.draw.rect(window, self.bottom_colour, (self.x, self.y, self.width, self.height), border_radius=3)
+        pygame.draw.rect(window, self.top_colour, (self.x, self.y, self.current_width, self.height), border_radius=3)
 
     def reduce_bar(self, damage_value):
         self.current_value -= damage_value
