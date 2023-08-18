@@ -16,6 +16,9 @@ class UserPlane(BasePlane):
     def __init__(self, model, health, armor, damage):
         super().__init__(model, health, armor, damage)
 
+        self.extra_bullets_duration = 20
+        self.duration_left = 0
+
     @property
     def get_shoot_cd(self):
         return 0.5
@@ -138,6 +141,8 @@ class UserPlane(BasePlane):
         if not self.can_shoot_bullet:
             self.lower_shoot_cooldown()
 
+        self.lower_extra_bullets_duration()
+
     def shoot_bullet(self):
         """
         1. loops through the sliced tuple with the coordinates of the plane weapons
@@ -155,4 +160,17 @@ class UserPlane(BasePlane):
     def remove_out_of_boundary_bullets(self):
         self.bullets = [bullet for bullet in self.bullets if bullet.bullet_y > 0]
 
+    def receive_extra_bullets(self):
+        self.shoot_bullets_amount = 4
+        self.duration_left = self.extra_bullets_duration
 
+    def extra_bullets_fade_away(self):
+        self.shoot_bullets_amount = 2
+
+    def lower_extra_bullets_duration(self):
+        if self.duration_left > 0:
+            self.duration_left -= 1 / self.GAME_FPS
+
+            if self.duration_left <= 0:
+                self.duration_left = 0
+                self.extra_bullets_fade_away()
