@@ -2,6 +2,8 @@
 import pygame as pg
 
 import game.float_rect
+from game.extra_bullets_powerup import ExtraBulletsPowerUp
+from game.powerup_controller import PowerupController
 
 pg.init()
 
@@ -63,12 +65,18 @@ pg.time.set_timer(SPAWN_ENEMY_PLANE, 5_000)
 SPAWN_TOWER = pg.USEREVENT + 2
 pg.time.set_timer(SPAWN_TOWER, 8_000)
 
+EXTRA_BULLETS_POWERUP = pg.USEREVENT + 3
+pg.time.set_timer(EXTRA_BULLETS_POWERUP, 30_000)
+
 enemy_planes_surface_objects = [
     pg.image.load(f"../images/enemy_plane_images/enemy_plane_{i}.png").convert_alpha() for i in range(1, 4)
 ]
 tower_img = pg.image.load("../images/buildings/tower_1.png").convert_alpha()
 
 enemies = EnemyController()
+
+extra_bullets_powerup = ExtraBulletsPowerUp(image=pg.image.load("../images/power_ups/powerup_x2.png").convert_alpha())
+powers_controller = PowerupController()
 
 def collision():
     for enemy in enemies.enemy_planes:
@@ -98,6 +106,9 @@ while running:
         elif event.type == SPAWN_TOWER:
             enemies.add_enemy(Tower(tower_img, 100, 100, 20)) # TODO: hardcoded values must come from json
 
+        elif event.type == EXTRA_BULLETS_POWERUP:
+            powers_controller.extra_bullets = extra_bullets_powerup
+
     background.loop_background(screen)
 
     keys_pressed = pg.key.get_pressed()
@@ -116,6 +127,8 @@ while running:
     user_plane.functionality()
     user_plane.display_plane(screen)
     user_plane.update_shot_bullets(screen)
+
+    powers_controller.render_extra_bullets(screen=screen, user_plane=user_plane)
 
     if collision():
         user_plane.health_bar.reduce_bar(1)
