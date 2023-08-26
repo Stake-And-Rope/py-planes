@@ -99,12 +99,12 @@ while running:
         if event.type == pg.QUIT:
             running = False
 
+        elif event.type == SPAWN_TOWER:
+            enemies.add_enemy(Tower(tower_img, 100, 100, 20))  # TODO: hardcoded values must come from json
+
         elif event.type == SPAWN_ENEMY_PLANE:
             random_image = helpers.get_random_image_of_enemy_planes(enemy_planes_surface_objects)
             enemies.add_enemy(EnemyPlane(random_image, 100, 100, 20))  # TODO: hardcoded values must come from json
-
-        elif event.type == SPAWN_TOWER:
-            enemies.add_enemy(Tower(tower_img, 100, 100, 20)) # TODO: hardcoded values must come from json
 
         elif event.type == EXTRA_BULLETS_POWERUP:
             powers_controller.extra_bullets = extra_bullets_powerup
@@ -131,7 +131,9 @@ while running:
     powers_controller.render_extra_bullets(screen=screen, user_plane=user_plane)
 
     if collision():
-        user_plane.health_bar.reduce_bar(1)
+        user_plane.armor_bar.reduce_bar(1)
+        if user_plane.armor_bar.current_width == 0:
+            user_plane.health_bar.reduce_bar(1)
 
     user_plane.armor_bar.draw_bar(screen)
     user_plane.health_bar.draw_bar(screen)
