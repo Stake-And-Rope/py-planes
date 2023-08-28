@@ -1,0 +1,44 @@
+{
+    "user_plane_1": {
+        "plane_name": "Plane 1",
+        "health": "100",
+        "armor": "100",
+        "damage": "50",
+        "gold": "0"
+    },
+    "user_plane_2": {
+        "plane_name": "Plane 2",
+        "health": "100",
+        "armor": "120",
+        "damage": "60",
+        "gold": "100"
+    },
+    "user_plane_3": {
+        "plane_name": "Plane 3",
+        "health": "100",
+        "armor": "150",
+        "damage": "80",
+        "gold": "150"
+    },
+    "user_plane_4": {
+        "plane_name": "Plane 4",
+        "health": "100",
+        "armor": "170",
+        "damage": "100",
+        "gold": "200"
+    },
+    "user_plane_5": {
+        "plane_name": "Plane 5",
+        "health": "100",
+        "armor": "190",
+        "damage": "120",
+        "gold": "250"
+    },
+    "user_plane_6": {
+        "plane_name": "Plane 6",
+        "health": "100",
+        "armor": "210",
+        "damage": "140",
+        "gold": "300"
+    }
+}

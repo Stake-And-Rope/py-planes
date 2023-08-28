@@ -1,0 +1,117 @@
+.planes { 
+    background-image: url(images/menu/planes_background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-color: #56ba77; */
+    color: #bfbfbf;
+    border-radius:  10px;
+    border: 1px solid #bfbfbf;
+    border-bottom: 3px solid #000000;
+    border-right: 3px solid #000000;
+    padding: 2px 2px;
+    margin-top: 2px;
+    outline: 0px;
+}
+
+.planes:hover {
+    background-color: #fd6500;
+}
+
+.background {
+    background-image: url(images/menu/main_menu_background2.jpg);
+    background-position: right center;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
+}
+
+.settings_background {
+    background-image: url(images/menu/settings_background.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
+}
+
+.credits_background {
+    background-image: url(images/menu/credits_menu_background.jpg);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
+}
+
+.settings_text {
+    color: #bfbfbf;
+
+}
+
+.title_area {
+    color: #bfbfbf;
+
+}
+
+.description_area {
+    border: 0px;
+    color: #bfbfbf;
+}
+
+
+.choose_plane_background {
+    background-image: url(images/menu/planes_menu_background.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 0px;
+    border: 0px;
+}
+
+.menu_button {
+    background-image: url(images/menu/button_background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #bfbfbf;
+    border-radius: 2px;
+    border: 4px solid #bfbfbf;
+    border-bottom: 0px solid #000000;
+    border-right: 0px solid #000000;
+    padding: -10px -10px;
+    margin: -10px;
+    outline: -10px;
+}
+
+.menu_button:hover {
+    background-image: url(images/menu/button_background_hover.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #bfbfbf;
+}
+
+.menu_button:pressed {
+    border: 200px;
+    background-color: #000000;
+}
+
+
+.github_button {
+    background-image: url(images/menu/button_background2_hover.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #bfbfbf;
+    border-radius: 2px;
+    border: 4px solid #bfbfbf;
+    border-bottom: 0px solid #000000;
+    border-right: 0px solid #000000;
+    padding: -10px -10px;
+    margin: -10px;
+    outline: -10px;
+}
+
+.github_button:hover {
+    background-image: url(images/menu/button_background2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+
+
+

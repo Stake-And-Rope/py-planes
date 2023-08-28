@@ -1,0 +1,18 @@
+# Ignore pycache
+images/__pycache__/
+gui/__pycache__/
+game/__pycache__/
+sounds/__pycache__/
+__pycache__/
+
+# Ignore VSCode config dir
+.vscode/
+
+# Ignore PyCharm dir
+.idea/
+
+# Ignore Obsidian config dir
+.obsidan/
+
+# for testing purposes
+/game/test_mask_overlap.py

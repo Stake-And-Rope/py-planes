@@ -1,0 +1,20 @@
+{
+    "enemy_plane_1": {
+        "plane_name": "Enemy Plane 1",
+        "health": "100",
+        "armor": "100",
+        "damage": "10"
+    },
+    "enemy_plane_2": {
+        "plane_name": "Enemy Plane 2",
+        "health": "100",
+        "armor": "120",
+        "damage": "20"
+    },
+    "enemy_plane_3": {
+        "plane_name": "Enemy Plane 3",
+        "health": "100",
+        "armor": "150",
+        "damage": "30"
+    }
+}
