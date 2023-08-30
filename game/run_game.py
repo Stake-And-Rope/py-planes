@@ -88,12 +88,9 @@ def collision(curr_enemy):
 
             if not user_plane_mask.overlap(bullet_mask,
                                        (int(bullet.float_rect.x) - int(user_plane.float_rect.x), int(bullet.float_rect.y) - int(user_plane.float_rect.y))):
-                pass
-            else:
                 not_collided_bullets.append(bullet)
         else:
             not_collided_bullets.append(bullet)
-
 
     if len(not_collided_bullets) < len(curr_enemy.bullets):
         len_all_enemy_bullets, len_all_not_collided_bullets = len(curr_enemy.bullets), len(not_collided_bullets)
