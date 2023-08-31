@@ -20,8 +20,7 @@ from game.planes.user_plane import UserPlane
 from game.planes.enemy_plane import EnemyPlane
 from game.planes.control_enemies import EnemyController
 from game.planes.enemy_tower import Tower
-from game.float_rect import float_rects_collide
-from bar import Bar
+from game.collision import check_user_plane_collision, check_enemy_collision
 
 sys.path.append(r'..')
 
@@ -78,28 +77,6 @@ enemies = EnemyController()
 extra_bullets_powerup = ExtraBulletsPowerUp(image=pg.image.load("../images/power_ups/powerup_x2.png").convert_alpha())
 powers_controller = PowerupController()
 
-def collision(curr_enemy):
-    not_collided_bullets = []
-
-    for bullet in curr_enemy.bullets:
-        if float_rects_collide(bullet.float_rect, user_plane.float_rect):
-            bullet_mask = bullet.bullet_mask
-            user_plane_mask = user_plane.plane_mask
-
-            if not user_plane_mask.overlap(bullet_mask,
-                                       (int(bullet.float_rect.x) - int(user_plane.float_rect.x), int(bullet.float_rect.y) - int(user_plane.float_rect.y))):
-                not_collided_bullets.append(bullet)
-        else:
-            not_collided_bullets.append(bullet)
-
-    if len(not_collided_bullets) < len(curr_enemy.bullets):
-        len_all_enemy_bullets, len_all_not_collided_bullets = len(curr_enemy.bullets), len(not_collided_bullets)
-        curr_enemy.bullets = not_collided_bullets
-        return len_all_enemy_bullets - len_all_not_collided_bullets
-
-    return False
-
-
 
 running = True
 while running:
@@ -123,14 +100,6 @@ while running:
 
     keys_pressed = pg.key.get_pressed()
 
-    # if keys_pressed[pg.K_1]:
-    #     health_bar.reduce_bar(1)
-
-    #
-    # if keys_pressed[pg.K_2]:
-    #     armour_bar.reduce_bar(1)
-
-
     enemies.update_planes(screen)
     enemies.update_towers(screen, user_plane)
 
@@ -140,18 +109,8 @@ while running:
 
     powers_controller.render_extra_bullets(screen=screen, user_plane=user_plane)
 
-    # if collision():
-    #     user_plane.armor_bar.reduce_bar(1)
-    #     if user_plane.armor_bar.current_width == 0:
-    #         user_plane.health_bar.reduce_bar(1)
-
-    for enemy in enemies.enemy_planes:
-        result = collision(enemy)
-
-        if user_plane.armor_bar.current_width == 0:
-            user_plane.health_bar.reduce_bar(1 * result)
-        else:
-            user_plane.armor_bar.reduce_bar(1 * result)
+    check_user_plane_collision(enemies, user_plane)
+    check_enemy_collision(enemies, user_plane)
 
     user_plane.armor_bar.draw_bar(screen)
     user_plane.health_bar.draw_bar(screen)
