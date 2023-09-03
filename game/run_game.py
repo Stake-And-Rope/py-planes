@@ -20,7 +20,7 @@ from game.planes.user_plane import UserPlane
 from game.planes.enemy_plane import EnemyPlane
 from game.planes.control_enemies import EnemyController
 from game.planes.enemy_tower import Tower
-from game.collision import check_user_plane_collision, check_enemy_collision
+from game.collision import check_user_plane_collision, check_enemy_collision, check_user_plane_and_enemies_collision
 
 sys.path.append(r'..')
 
@@ -111,6 +111,9 @@ while running:
 
     check_user_plane_collision(enemies, user_plane)
     check_enemy_collision(enemies, user_plane)
+    if check_user_plane_and_enemies_collision(enemies, user_plane):
+        # screen.fill((250, 0, 0))
+        print("COLLIDED WITH ENEMY! YOU LOSE!")
 
     user_plane.armor_bar.draw_bar(screen)
     user_plane.health_bar.draw_bar(screen)

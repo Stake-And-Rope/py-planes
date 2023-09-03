@@ -55,3 +55,17 @@ def check_enemy_collision(all_enemies, c_user_plane):
         damage = collision(c_user_plane, enemy_tower)
 
         enemy_tower.enemy_health_bar.reduce_bar(REDUCE_TIMES_ENEMY_OR_TOWER * damage)
+
+
+def check_user_plane_and_enemies_collision(all_enemies, c_user_plane):
+    curr_enemies = all_enemies.enemy_planes + all_enemies.towers
+
+    for enemy_plane in curr_enemies:
+        if float_rects_collide(enemy_plane.float_rect, c_user_plane.float_rect):
+            enemy_plane_mask = enemy_plane.plane_mask
+            user_plane_mask = c_user_plane.plane_mask
+
+            if user_plane_mask.overlap(enemy_plane_mask,
+                                           (int(enemy_plane.float_rect.x) - int(c_user_plane.float_rect.x),
+                                            int(enemy_plane.float_rect.y) - int(c_user_plane.float_rect.y))):
+                return True
