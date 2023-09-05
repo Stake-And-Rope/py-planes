@@ -77,6 +77,15 @@ enemies = EnemyController()
 extra_bullets_powerup = ExtraBulletsPowerUp(image=pg.image.load("../images/power_ups/powerup_x2.png").convert_alpha())
 powers_controller = PowerupController()
 
+collision_with_enemy = False
+font_text = pg.font.SysFont('freesansbold.ttf', 35)
+
+
+def new_window():
+    screen.fill((0, 0, 0))
+    text = font_text.render('You lose!', True, (250, 0, 0))
+    screen.blit(text, text.get_rect(center=(450, 400)))
+
 
 running = True
 while running:
@@ -112,11 +121,13 @@ while running:
     check_user_plane_collision(enemies, user_plane)
     check_enemy_collision(enemies, user_plane)
     if check_user_plane_and_enemies_collision(enemies, user_plane):
-        # screen.fill((250, 0, 0))
-        print("COLLIDED WITH ENEMY! YOU LOSE!")
+        collision_with_enemy = True
 
     user_plane.armor_bar.draw_bar(screen)
     user_plane.health_bar.draw_bar(screen)
+
+    if collision_with_enemy:
+        new_window()
 
     pg.display.flip()
 
