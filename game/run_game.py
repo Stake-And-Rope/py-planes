@@ -82,7 +82,7 @@ font_text = pg.font.SysFont('freesansbold.ttf', 35)
 
 
 def new_window():
-    screen.fill((0, 0, 0))
+    background.loop_background(screen)
     text = font_text.render('You lose!', True, (250, 0, 0))
     screen.blit(text, text.get_rect(center=(450, 400)))
 
@@ -107,6 +107,7 @@ while running:
 
     if collision_with_enemy:
         new_window()
+        pg.display.flip()
         continue
 
     background.loop_background(screen)
@@ -124,6 +125,7 @@ while running:
 
     check_user_plane_collision(enemies, user_plane)
     check_enemy_collision(enemies, user_plane)
+
     if check_user_plane_and_enemies_collision(enemies, user_plane):
         collision_with_enemy = True
 
