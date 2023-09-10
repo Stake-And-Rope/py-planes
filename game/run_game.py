@@ -105,6 +105,10 @@ while running:
         elif event.type == EXTRA_BULLETS_POWERUP:
             powers_controller.extra_bullets = extra_bullets_powerup
 
+    if collision_with_enemy:
+        new_window()
+        continue
+
     background.loop_background(screen)
 
     keys_pressed = pg.key.get_pressed()
@@ -125,9 +129,6 @@ while running:
 
     user_plane.armor_bar.draw_bar(screen)
     user_plane.health_bar.draw_bar(screen)
-
-    if collision_with_enemy:
-        new_window()
 
     pg.display.flip()
 
